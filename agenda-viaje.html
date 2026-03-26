@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de viaje — Devtata</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lilac-deep: #7c3aed;
+            --lilac-soft: #ddd6fe;
+            --pink-deep: #db2777;
+            --pink: #f472b6;
+            --pink-soft: #fbcfe8;
+            --cream: #fdf4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Quicksand", system-ui, sans-serif;
+            background: linear-gradient(
+                145deg,
+                var(--cream) 0%,
+                var(--lilac-soft) 35%,
+                var(--pink-soft) 70%,
+                #fce7f3 100%
+            );
+            color: #4c1d95;
+            padding: clamp(1rem, 4vw, 2rem);
+            padding-bottom: 3rem;
+        }
+
+        .top-bar {
+            max-width: 720px;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .top-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--lilac-deep);
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+        }
+
+        .progress-wrap {
+            flex: 1;
+            min-width: 200px;
+            max-width: 320px;
+        }
+
+        .progress-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #9d174d;
+            margin-bottom: 0.35rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--lilac-deep), var(--pink-deep));
+            transition: width 0.35s ease;
+        }
+
+        .shell {
+            max-width: 720px;
+            margin: 0 auto;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.88) 0%,
+                rgba(250, 232, 255, 0.92) 50%,
+                rgba(252, 231, 243, 0.88) 100%
+            );
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            box-shadow:
+                0 4px 28px rgba(124, 58, 237, 0.12),
+                0 1px 0 rgba(255, 255, 255, 0.85) inset;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--lilac-deep) 0%, var(--pink-deep) 55%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.35rem;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            color: #86198f;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-bottom: 1.35rem;
+        }
+
+        .section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 2px solid rgba(244, 114, 182, 0.45);
+        }
+
+        .list {
+            list-style: none;
+        }
+
+        .list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .list input[type="checkbox"] {
+            width: 1.15rem;
+            height: 1.15rem;
+            margin-top: 0.15rem;
+            accent-color: var(--lilac-deep);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .list label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .list input:checked + label {
+            text-decoration: line-through;
+            opacity: 0.65;
+            color: #7c3aed;
+        }
+
+        .tools {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(167, 139, 250, 0.3);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .tools button {
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(167, 139, 250, 0.5);
+            background: rgba(255, 255, 255, 0.85);
+            color: #6d28d9;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .tools button:hover {
+            background: rgba(250, 232, 255, 0.95);
+            transform: translateY(-1px);
+        }
+
+        .tools button.danger {
+            color: #be185d;
+            border-color: rgba(244, 114, 182, 0.6);
+        }
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .field label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #5b21b6;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            border-radius: 14px;
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            outline: none;
+            background: rgba(255, 255, 255, 0.85);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #3b0764;
+        }
+
+        .field input:focus {
+            border-color: rgba(124, 58, 237, 0.65);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .savings {
+            grid-column: 1 / -1;
+            padding-top: 0.35rem;
+        }
+
+        .savings-title {
+            font-weight: 800;
+            color: #6d28d9;
+            margin-bottom: 0.5rem;
+        }
+
+        .month-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(100px, 140px) auto;
+            gap: 0.6rem;
+            align-items: center;
+            margin: 0.45rem 0;
+            padding: 0.45rem 0.6rem;
+            border-radius: 16px;
+            border: 1px solid rgba(167, 139, 250, 0.22);
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        .month-row .month-label {
+            padding: 0.65rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4c1d95;
+        }
+
+        .month-row .month-label:focus {
+            border-color: rgba(124, 58, 237, 0.65);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
+
+        .month-row .month-amount {
+            padding: 0.65rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #3b0764;
+        }
+
+        .month-row .month-amount:focus {
+            border-color: rgba(124, 58, 237, 0.65);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
+
+        .btn-row-remove {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(244, 114, 182, 0.55);
+            background: rgba(255, 255, 255, 0.85);
+            color: #be185d;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .btn-row-remove:hover {
+            background: rgba(252, 231, 243, 0.95);
+            transform: translateY(-1px);
+        }
+
+        .btn-row-remove:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .budget-row-tools {
+            margin-top: 0.65rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .budget-row-tools button {
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(167, 139, 250, 0.55);
+            background: rgba(255, 255, 255, 0.88);
+            color: #6d28d9;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .budget-row-tools button:hover {
+            background: rgba(250, 232, 255, 0.95);
+            transform: translateY(-1px);
+        }
+
+        .budget-summary {
+            padding-top: 0.95rem;
+            border-top: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .summary-line {
+            font-size: 0.95rem;
+            margin: 0.35rem 0;
+            color: #4c1d95;
+        }
+
+        .budget-progress-bar {
+            margin-top: 0.6rem;
+            height: 10px;
+        }
+
+        @media (max-width: 560px) {
+            .budget-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .month-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-row-remove {
+                justify-self: end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-links">
+            <a class="back-link" href="index.html">← Volver a Hola Mundo</a>
+            <a class="back-link" href="blog-viajes.html">Blog viajero</a>
+            <a class="back-link" href="mapa-suenos.html">Mapa de sueños</a>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label" id="progressLabel">Progreso: 0%</div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="shell">
+        <h1>Agenda para preparar tu viaje</h1>
+        <p class="intro">
+            Marca lo que ya tengas listo. Tu progreso se guarda en este navegador (aunque cierres la pestaña).
+        </p>
+
+        <section class="section" aria-labelledby="sec-docs">
+            <h2 id="sec-docs">Documentos e identidad</h2>
+            <ul class="list" data-section="docs">
+                <li><input type="checkbox" id="d1" data-id="d1"><label for="d1">Pasaporte o documento de identidad vigente</label></li>
+                <li><input type="checkbox" id="d2" data-id="d2"><label for="d2">Visa o permisos del destino (si aplica)</label></li>
+                <li><input type="checkbox" id="d3" data-id="d3"><label for="d3">Licencia de conducir internacional (si vas a manejar)</label></li>
+                <li><input type="checkbox" id="d4" data-id="d4"><label for="d4">Copias digitales / escaneos de documentos en la nube</label></li>
+                <li><input type="checkbox" id="d5" data-id="d5"><label for="d5">Seguro de viaje contratado y número de emergencia</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-book">
+            <h2 id="sec-book">Reservas y transporte</h2>
+            <ul class="list" data-section="book">
+                <li><input type="checkbox" id="b1" data-id="b1"><label for="b1">Vuelos, tren o bus: billetes confirmados e itinerario</label></li>
+                <li><input type="checkbox" id="b2" data-id="b2"><label for="b2">Hotel o alojamiento con confirmación y dirección</label></li>
+                <li><input type="checkbox" id="b3" data-id="b3"><label for="b3">Traslado aeropuerto–hotel o alquiler de coche</label></li>
+                <li><input type="checkbox" id="b4" data-id="b4"><label for="b4">Check-in online del vuelo (cuando esté disponible)</label></li>
+                <li><input type="checkbox" id="b5" data-id="b5"><label for="b5">Asiento, equipaje de mano y facturado según aerolínea</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-money">
+            <h2 id="sec-money">Dinero y comunicación</h2>
+            <ul class="list" data-section="money">
+                <li><input type="checkbox" id="m1" data-id="m1"><label for="m1">Avisar al banco del uso de tarjetas en el extranjero</label></li>
+                <li><input type="checkbox" id="m2" data-id="m2"><label for="m2">Efectivo local o divisas / plan de retiros</label></li>
+                <li><input type="checkbox" id="m3" data-id="m3"><label for="m3">Roaming, eSIM o datos móviles en destino</label></li>
+                <li><input type="checkbox" id="m4" data-id="m4"><label for="m4">Apps útiles: mapas, traductor, moneda, transporte</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-budget">
+            <h2 id="sec-budget">Presupuesto del viaje</h2>
+            <p class="intro" style="margin-bottom: 0.85rem;">
+                Define cuánto crees que gastarás, cuánto llevarás aparte del ahorro (si aplica) y anota tu plan por meses o períodos: sirve en cualquier época del año.
+            </p>
+
+            <div class="budget-grid">
+                <div class="field">
+                    <label for="budgetTotal">Presupuesto total estimado del viaje</label>
+                    <input id="budgetTotal" type="number" inputmode="numeric" min="0" step="10" placeholder="Ej: 1200000" />
+                </div>
+
+                <div class="field">
+                    <label for="budgetTripReserve">Dinero al viajar (aparte del ahorro anotado abajo)</label>
+                    <input id="budgetTripReserve" type="number" inputmode="numeric" min="0" step="10" placeholder="Ej: ahorros ya tenidos, regalo, tarjeta…" />
+                </div>
+
+                <div class="savings" aria-label="Ahorro por período">
+                    <div class="savings-title">Ahorro por mes o período</div>
+                    <div id="budgetRows"></div>
+                    <div class="budget-row-tools">
+                        <button type="button" id="budgetAddRow">+ Añadir fila</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="budget-summary">
+                <div class="summary-line"><strong>Ahorro acumulado (filas):</strong> <span id="budgetSavedTotal">0</span></div>
+                <div class="summary-line"><strong>Falta por cubrir con ahorros:</strong> <span id="budgetRemaining">0</span></div>
+                <div class="summary-line"><strong>Progreso de ahorro:</strong> <span id="budgetProgressText">0%</span></div>
+
+                <div class="progress-bar budget-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" id="budgetProgressFill" style="width: 0%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="sec-health">
+            <h2 id="sec-health">Salud y bienestar</h2>
+            <ul class="list" data-section="health">
+                <li><input type="checkbox" id="h1" data-id="h1"><label for="h1">Vacunas o certificados requeridos en el destino</label></li>
+                <li><input type="checkbox" id="h2" data-id="h2"><label for="h2">Medicamentos con receta y dosis suficientes</label></li>
+                <li><input type="checkbox" id="h3" data-id="h3"><label for="h3">Botiquín básico (analgesia, digestivo, curitas…)</label></li>
+                <li><input type="checkbox" id="h4" data-id="h4"><label for="h4">Protección solar e hidratación para el clima</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-pack">
+            <h2 id="sec-pack">Maleta y ropa</h2>
+            <ul class="list" data-section="pack">
+                <li><input type="checkbox" id="p1" data-id="p1"><label for="p1">Ropa acorde al clima y actividades planeadas</label></li>
+                <li><input type="checkbox" id="p2" data-id="p2"><label for="p2">Calzado cómodo y, si hace falta, formal o de agua</label></li>
+                <li><input type="checkbox" id="p3" data-id="p3"><label for="p3">Artículos de aseo en tamaño de viaje</label></li>
+                <li><input type="checkbox" id="p4" data-id="p4"><label for="p4">Adaptadores de enchufe y cargadores</label></li>
+                <li><input type="checkbox" id="p5" data-id="p5"><label for="p5">Bolsa de mano con lo esencial por si pierdes la maleta</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-home">
+            <h2 id="sec-home">Antes de salir de casa</h2>
+            <ul class="list" data-section="home">
+                <li><input type="checkbox" id="ho1" data-id="ho1"><label for="ho1">Regar plantas, comida de mascotas, llaves a alguien de confianza</label></li>
+                <li><input type="checkbox" id="ho2" data-id="ho2"><label for="ho2">Desenchufar lo innecesario, cerrar gas/agua si aplica</label></li>
+                <li><input type="checkbox" id="ho3" data-id="ho3"><label for="ho3">Basura fuera, nevera revisada, alarmas activadas</label></li>
+                <li><input type="checkbox" id="ho4" data-id="ho4"><label for="ho4">Alarma de despertador y salida con margen al aeropuerto/estación</label></li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="sec-extra">
+            <h2 id="sec-extra">Extras</h2>
+            <ul class="list" data-section="extra">
+                <li><input type="checkbox" id="e1" data-id="e1"><label for="e1">Entradas a museos, tours o eventos reservados</label></li>
+                <li><input type="checkbox" id="e2" data-id="e2"><label for="e2">Lista de lugares y restaurantes que quieres visitar</label></li>
+                <li><input type="checkbox" id="e3" data-id="e3"><label for="e3">Contacto de emergencia en el país y en casa</label></li>
+            </ul>
+        </section>
+
+        <div class="tools">
+            <button type="button" id="btnAll">Marcar todo</button>
+            <button type="button" id="btnNone">Desmarcar todo</button>
+            <button type="button" class="danger" id="btnReset">Borrar mi progreso guardado</button>
+        </div>
+    </main>
+
+    <script>
+        const STORAGE_KEY = "devtata-trip-checklist";
+        const BUDGET_STORAGE_KEY = "devtata-trip-budget";
+
+        const boxes = document.querySelectorAll('.list input[type="checkbox"]');
+        const progressFill = document.getElementById("progressFill");
+        const progressLabel = document.getElementById("progressLabel");
+        const bar = document.querySelector(".progress-bar");
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return;
+                const data = JSON.parse(raw);
+                if (typeof data !== "object" || data === null) return;
+                boxes.forEach((cb) => {
+                    if (data[cb.dataset.id]) cb.checked = true;
+                });
+            } catch (_) {}
+        }
+
+        function saveState() {
+            const data = {};
+            boxes.forEach((cb) => {
+                if (cb.checked) data[cb.dataset.id] = true;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function updateProgress() {
+            const total = boxes.length;
+            const done = [...boxes].filter((cb) => cb.checked).length;
+            const pct = total ? Math.round((done / total) * 100) : 0;
+            progressFill.style.width = pct + "%";
+            progressLabel.textContent = "Progreso: " + done + " / " + total + " (" + pct + "%)";
+            bar.setAttribute("aria-valuenow", String(pct));
+        }
+
+        boxes.forEach((cb) => {
+            cb.addEventListener("change", () => {
+                saveState();
+                updateProgress();
+            });
+        });
+
+        document.getElementById("btnAll").addEventListener("click", () => {
+            boxes.forEach((cb) => { cb.checked = true; });
+            saveState();
+            updateProgress();
+        });
+
+        document.getElementById("btnNone").addEventListener("click", () => {
+            boxes.forEach((cb) => { cb.checked = false; });
+            saveState();
+            updateProgress();
+        });
+
+        document.getElementById("btnReset").addEventListener("click", () => {
+            if (confirm("¿Borrar todo el progreso guardado en este navegador?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                boxes.forEach((cb) => { cb.checked = false; });
+                updateProgress();
+            }
+        });
+
+        loadState();
+        updateProgress();
+
+        // ===== Presupuesto (meses / períodos dinámicos) =====
+        const budgetTotalEl = document.getElementById("budgetTotal");
+        const budgetTripReserveEl = document.getElementById("budgetTripReserve");
+        const budgetRowsMount = document.getElementById("budgetRows");
+        const budgetAddRowBtn = document.getElementById("budgetAddRow");
+
+        const budgetOut = {
+            savedTotal: document.getElementById("budgetSavedTotal"),
+            remaining: document.getElementById("budgetRemaining"),
+            progressText: document.getElementById("budgetProgressText"),
+            progressFill: document.getElementById("budgetProgressFill"),
+        };
+
+        function toNumber(v) {
+            const n = parseFloat(String(v ?? "").replace(",", "."));
+            return Number.isFinite(n) ? n : 0;
+        }
+
+        function formatNumber(n) {
+            return Math.round(n).toLocaleString(undefined);
+        }
+
+        function readBudgetPayloadFromStorage() {
+            try {
+                const raw = localStorage.getItem(BUDGET_STORAGE_KEY);
+                if (!raw) return null;
+                const data = JSON.parse(raw);
+                return typeof data === "object" && data !== null ? data : null;
+            } catch (_) {
+                return null;
+            }
+        }
+
+        function defaultBudgetShape() {
+            return {
+                total: "",
+                tripReserve: "",
+                rows: [
+                    { label: "", amount: "" },
+                    { label: "", amount: "" },
+                    { label: "", amount: "" },
+                    { label: "", amount: "" },
+                ],
+            };
+        }
+
+        function migrateLegacyBudget(data) {
+            if (!data) return defaultBudgetShape();
+            if (Array.isArray(data.rows) && data.rows.length > 0) return data;
+
+            const legacyReserve =
+                data.tripReserve ??
+                data.sepExpense ??
+                data.budgetSeptemberExpense;
+            const legacyTotal = data.total;
+
+            const hasLegacyMonths =
+                "saveMay" in data ||
+                "saveJun" in data ||
+                "saveJul" in data ||
+                "saveAug" in data;
+
+            if (!hasLegacyMonths) {
+                return {
+                    ...defaultBudgetShape(),
+                    total: legacyTotal ?? "",
+                    tripReserve: legacyReserve ?? "",
+                };
+            }
+
+            return {
+                total: legacyTotal ?? "",
+                tripReserve: legacyReserve ?? "",
+                rows: [
+                    { label: "", amount: data.saveMay ?? "" },
+                    { label: "", amount: data.saveJun ?? "" },
+                    { label: "", amount: data.saveJul ?? "" },
+                    { label: "", amount: data.saveAug ?? "" },
+                ],
+            };
+        }
+
+        function createBudgetRow(label, amount) {
+            const row = document.createElement("div");
+            row.className = "month-row";
+
+            const labelInput = document.createElement("input");
+            labelInput.type = "text";
+            labelInput.className = "month-label";
+            labelInput.placeholder = "Ej: Enero 2026 o Quincena 1";
+            labelInput.value = label ?? "";
+            labelInput.autocomplete = "off";
+
+            const amountInput = document.createElement("input");
+            amountInput.type = "number";
+            amountInput.className = "month-amount";
+            amountInput.inputMode = "numeric";
+            amountInput.min = "0";
+            amountInput.step = "10";
+            amountInput.placeholder = "0";
+            if (amount !== undefined && amount !== null && amount !== "") {
+                amountInput.value = String(amount);
+            }
+
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "btn-row-remove";
+            removeBtn.setAttribute("aria-label", "Quitar fila");
+            removeBtn.textContent = "✕";
+
+            function onFieldChange() {
+                computeBudget();
+                saveBudget();
+            }
+
+            labelInput.addEventListener("input", onFieldChange);
+            amountInput.addEventListener("input", onFieldChange);
+            removeBtn.addEventListener("click", () => {
+                if (budgetRowsMount.querySelectorAll(".month-row").length <= 1) return;
+                row.remove();
+                setAllRemoveStates();
+                computeBudget();
+                saveBudget();
+            });
+
+            row.append(labelInput, amountInput, removeBtn);
+            budgetRowsMount.append(row);
+            setAllRemoveStates();
+        }
+
+        function setAllRemoveStates() {
+            const rows = budgetRowsMount.querySelectorAll(".month-row");
+            rows.forEach((r) => {
+                const btn = r.querySelector(".btn-row-remove");
+                if (btn) btn.disabled = rows.length <= 1;
+            });
+        }
+
+        function collectRowsPayload() {
+            const rows = [];
+            budgetRowsMount.querySelectorAll(".month-row").forEach((r) => {
+                const label = r.querySelector(".month-label")?.value ?? "";
+                const amount = r.querySelector(".month-amount")?.value ?? "";
+                rows.push({ label, amount });
+            });
+            return rows;
+        }
+
+        function computeBudget() {
+            const total = toNumber(budgetTotalEl?.value);
+            const tripReserve = toNumber(budgetTripReserveEl?.value);
+
+            let saved = 0;
+            budgetRowsMount.querySelectorAll(".month-amount").forEach((input) => {
+                saved += toNumber(input.value);
+            });
+
+            const requiredSavings = Math.max(0, total - tripReserve);
+            const remaining = requiredSavings - saved;
+
+            const progressPct =
+                requiredSavings > 0
+                    ? Math.max(0, Math.min(100, (saved / requiredSavings) * 100))
+                    : 0;
+
+            budgetOut.savedTotal.textContent = formatNumber(saved);
+            budgetOut.remaining.textContent = formatNumber(Math.max(0, remaining));
+            budgetOut.progressText.textContent = Math.round(progressPct) + "%";
+            budgetOut.progressFill.style.width = Math.round(progressPct) + "%";
+
+            const progressbar = budgetOut.progressFill.closest(".progress-bar");
+            if (progressbar) {
+                progressbar.setAttribute("aria-valuenow", String(Math.round(progressPct)));
+            }
+        }
+
+        function saveBudget() {
+            const payload = {
+                v: 2,
+                total: budgetTotalEl?.value ?? "",
+                tripReserve: budgetTripReserveEl?.value ?? "",
+                rows: collectRowsPayload(),
+            };
+            localStorage.setItem(BUDGET_STORAGE_KEY, JSON.stringify(payload));
+        }
+
+        function loadBudget() {
+            const raw = readBudgetPayloadFromStorage();
+            const data = migrateLegacyBudget(raw);
+
+            if (budgetTotalEl) budgetTotalEl.value = data.total ?? "";
+            if (budgetTripReserveEl) {
+                budgetTripReserveEl.value =
+                    data.tripReserve ?? data.sepExpense ?? data.budgetSeptemberExpense ?? "";
+            }
+
+            budgetRowsMount.innerHTML = "";
+            const rows = Array.isArray(data.rows) ? data.rows : [];
+            if (rows.length === 0) {
+                createBudgetRow("", "");
+            } else {
+                rows.forEach((r) =>
+                    createBudgetRow(r.label ?? "", r.amount ?? "")
+                );
+            }
+            setAllRemoveStates();
+        }
+
+        budgetAddRowBtn?.addEventListener("click", () => {
+            createBudgetRow("", "");
+            setAllRemoveStates();
+            computeBudget();
+            saveBudget();
+        });
+
+        [budgetTotalEl, budgetTripReserveEl].forEach((el) => {
+            if (!el) return;
+            el.addEventListener("input", () => {
+                computeBudget();
+                saveBudget();
+            });
+        });
+
+        loadBudget();
+        computeBudget();
+    </script>
+</body>
+</html>

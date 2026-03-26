@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de sueños — ViajecitosCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lilac-deep: #7c3aed;
+            --lilac-soft: #ddd6fe;
+            --pink-deep: #db2777;
+            --pink: #f472b6;
+            --pink-soft: #fbcfe8;
+            --cream: #fdf4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Quicksand", system-ui, sans-serif;
+            background: linear-gradient(
+                145deg,
+                var(--cream) 0%,
+                var(--lilac-soft) 35%,
+                var(--pink-soft) 70%,
+                #fce7f3 100%
+            );
+            color: #4c1d95;
+            padding: clamp(1rem, 4vw, 2rem);
+            padding-bottom: 3rem;
+        }
+
+        .top-bar {
+            max-width: 980px;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--lilac-deep);
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+        }
+
+        .shell {
+            max-width: 980px;
+            margin: 0 auto;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.88) 0%,
+                rgba(250, 232, 255, 0.92) 50%,
+                rgba(252, 231, 243, 0.88) 100%
+            );
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            box-shadow:
+                0 4px 28px rgba(124, 58, 237, 0.12),
+                0 1px 0 rgba(255, 255, 255, 0.85) inset;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--lilac-deep) 0%, var(--pink-deep) 55%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.35rem;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            color: #86198f;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .flash {
+            display: none;
+            margin-bottom: 1rem;
+            padding: 0.7rem 0.9rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .flash.show {
+            display: block;
+        }
+
+        .flash.ok {
+            color: #5b21b6;
+            background: rgba(237, 233, 254, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.5);
+        }
+
+        .flash.error {
+            color: #9d174d;
+            background: rgba(252, 231, 243, 0.9);
+            border: 1px solid rgba(244, 114, 182, 0.55);
+        }
+
+        .form-block {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .form-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 0.85rem;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #5b21b6;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            border-radius: 14px;
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #3b0764;
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 4.6rem;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: rgba(124, 58, 237, 0.65);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .submit-btn {
+            margin-top: 0.8rem;
+            border: none;
+            border-radius: 999px;
+            padding: 0.75rem 1.3rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.22);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.3);
+        }
+
+        .filters {
+            margin: 0.8rem 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            border: 1px solid rgba(167, 139, 250, 0.55);
+            border-radius: 999px;
+            padding: 0.42rem 0.92rem;
+            background: rgba(255, 255, 255, 0.8);
+            color: #6d28d9;
+            font-family: inherit;
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(250, 232, 255, 0.95);
+        }
+
+        .filter-btn.is-active {
+            color: #fff;
+            border-color: transparent;
+            background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+        }
+
+        .dream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .dream-card {
+            border-radius: 18px;
+            border: 1px solid rgba(167, 139, 250, 0.38);
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.08);
+            padding: 0.9rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.58rem;
+        }
+
+        .dream-img-wrap {
+            width: 100%;
+            height: 150px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: linear-gradient(135deg, var(--lilac-soft), var(--pink-soft));
+        }
+
+        .dream-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dream-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: rgba(109, 40, 217, 0.85);
+        }
+
+        .dream-place {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #5b21b6;
+        }
+
+        .dream-note {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #4c1d95;
+            min-height: 1.1rem;
+        }
+
+        .dream-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .pill {
+            border-radius: 999px;
+            padding: 0.24rem 0.6rem;
+            font-size: 0.74rem;
+            font-weight: 700;
+            border: 1px solid transparent;
+        }
+
+        .pill.priority-alta {
+            color: #7a1238;
+            background: rgba(251, 207, 232, 0.9);
+            border-color: rgba(244, 114, 182, 0.5);
+        }
+
+        .pill.priority-media {
+            color: #6d28d9;
+            background: rgba(237, 233, 254, 0.95);
+            border-color: rgba(167, 139, 250, 0.55);
+        }
+
+        .pill.priority-baja {
+            color: #0f766e;
+            background: rgba(204, 251, 241, 0.9);
+            border-color: rgba(45, 212, 191, 0.5);
+        }
+
+        .pill.status {
+            color: #4c1d95;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(167, 139, 250, 0.45);
+        }
+
+        .dream-actions {
+            margin-top: 0.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .action-btn {
+            border: 1px solid rgba(167, 139, 250, 0.55);
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
+            background: rgba(255, 255, 255, 0.85);
+            color: #6d28d9;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .action-btn.delete {
+            color: #be185d;
+            border-color: rgba(244, 114, 182, 0.6);
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 1.8rem 1rem;
+            color: #86198f;
+            font-size: 0.95rem;
+            border-radius: 18px;
+            border: 1px dashed rgba(167, 139, 250, 0.45);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .success-pop {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 20;
+            max-width: 300px;
+            border-radius: 14px;
+            padding: 0.75rem 0.9rem;
+            color: #5b21b6;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(167, 139, 250, 0.58);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+            font-size: 0.88rem;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .success-pop.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 650px) {
+            .field-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a class="nav-link" href="index.html">← Hola Mundo</a>
+        <a class="nav-link" href="agenda-viaje.html">← Agenda</a>
+        <a class="nav-link" href="blog-viajes.html">← Blog viajero</a>
+    </div>
+
+    <main class="shell">
+        <h1>Mapa de sueños</h1>
+        <p class="intro">
+            Tu wishlist emocional de destinos: prioriza, avanza y marca tus sueños logrados.
+        </p>
+
+        <div class="flash" id="flash" role="status" aria-live="polite"></div>
+
+        <section class="form-block">
+            <h2 class="form-title">Agregar destino soñado</h2>
+            <form id="dreamForm" novalidate>
+                <div class="field-grid">
+                    <div class="field">
+                        <label for="dreamPlace">Destino</label>
+                        <input id="dreamPlace" type="text" maxlength="120" placeholder="Ej: Kioto, Japón" required autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="dreamPriority">Prioridad</label>
+                        <select id="dreamPriority">
+                            <option value="alta">Alta</option>
+                            <option value="media" selected>Media</option>
+                            <option value="baja">Baja</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="dreamStatus">Estado inicial</label>
+                        <select id="dreamStatus">
+                            <option value="sueno" selected>Sueño</option>
+                            <option value="en_proceso">En proceso</option>
+                            <option value="logrado">Logrado</option>
+                        </select>
+                    </div>
+                    <div class="field full">
+                        <label for="dreamNote">Nota emocional</label>
+                        <textarea id="dreamNote" maxlength="1000" placeholder="¿Por qué este lugar significa tanto para ti?"></textarea>
+                    </div>
+                    <div class="field full">
+                        <label for="dreamImageFile">Imagen del destino (sube una foto)</label>
+                        <input id="dreamImageFile" name="imageFile" type="file" accept="image/*" required>
+                    </div>
+                </div>
+                <button class="submit-btn" type="submit">Guardar en mi mapa</button>
+            </form>
+        </section>
+
+        <div class="filters" role="tablist" aria-label="Filtro de sueños">
+            <button class="filter-btn is-active" type="button" data-filter="todos">Todos</button>
+            <button class="filter-btn" type="button" data-filter="sueno">Sueños</button>
+            <button class="filter-btn" type="button" data-filter="en_proceso">En proceso</button>
+            <button class="filter-btn" type="button" data-filter="logrado">Logrados</button>
+        </div>
+
+        <div class="dream-grid" id="dreamGrid" aria-live="polite"></div>
+    </main>
+
+    <div class="success-pop" id="successPop" role="status" aria-live="polite"></div>
+
+    <script>
+        const STORAGE_KEY = "devtata-dream-map";
+        const PRIORITY_ORDER = { alta: 0, media: 1, baja: 2 };
+        const STATUS_LABELS = {
+            sueno: "Sueño",
+            en_proceso: "En proceso",
+            logrado: "Logrado",
+        };
+        const PRIORITY_LABELS = {
+            alta: "Alta",
+            media: "Media",
+            baja: "Baja",
+        };
+
+        const form = document.getElementById("dreamForm");
+        const grid = document.getElementById("dreamGrid");
+        const imageInput = document.getElementById("dreamImageFile");
+        const flash = document.getElementById("flash");
+        const successPop = document.getElementById("successPop");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        let activeFilter = "todos";
+
+        const MAX_UPLOAD_BYTES = Math.floor(1.5 * 1024 * 1024);
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(String(r.result || ""));
+                r.onerror = () => reject(new Error("No se pudo leer el archivo."));
+                r.readAsDataURL(file);
+            });
+        }
+
+        function showFlash(message, kind) {
+            flash.className = "flash show " + (kind === "ok" ? "ok" : "error");
+            flash.textContent = message;
+        }
+
+        function hideFlash() {
+            flash.className = "flash";
+            flash.textContent = "";
+        }
+
+        function showSuccessMemory() {
+            successPop.textContent = "Este sueño ya es un recuerdo 💛";
+            successPop.classList.add("show");
+            setTimeout(() => {
+                successPop.classList.remove("show");
+            }, 2100);
+        }
+
+        function loadDreams() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return [];
+                const data = JSON.parse(raw);
+                if (!data || !Array.isArray(data.items)) return [];
+                return data.items.filter((item) => (
+                    item &&
+                    typeof item.id === "string" &&
+                    typeof item.place === "string" &&
+                    ["alta", "media", "baja"].includes(item.priority) &&
+                    ["sueno", "en_proceso", "logrado"].includes(item.status)
+                ));
+            } catch (_) {
+                return [];
+            }
+        }
+
+        function saveDreams(items) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ items }));
+        }
+
+        function sortDreams(items) {
+            return [...items].sort((a, b) => {
+                const statusWeightA = a.status === "logrado" ? 1 : 0;
+                const statusWeightB = b.status === "logrado" ? 1 : 0;
+                if (statusWeightA !== statusWeightB) return statusWeightA - statusWeightB;
+
+                const pa = PRIORITY_ORDER[a.priority] ?? 99;
+                const pb = PRIORITY_ORDER[b.priority] ?? 99;
+                if (pa !== pb) return pa - pb;
+
+                const ta = new Date(a.createdAt || 0).getTime();
+                const tb = new Date(b.createdAt || 0).getTime();
+                return tb - ta;
+            });
+        }
+
+        function applyFilter(items) {
+            if (activeFilter === "todos") return items;
+            return items.filter((item) => item.status === activeFilter);
+        }
+
+        function render() {
+            grid.innerHTML = "";
+            const dreams = applyFilter(sortDreams(loadDreams()));
+
+            if (dreams.length === 0) {
+                const empty = document.createElement("p");
+                empty.className = "empty-state";
+                empty.textContent = activeFilter === "todos"
+                    ? "Aún no tienes destinos en tu mapa de sueños."
+                    : "No hay destinos para este filtro.";
+                grid.append(empty);
+                return;
+            }
+
+            dreams.forEach((dream) => {
+                const card = document.createElement("article");
+                card.className = "dream-card";
+
+                const imgWrap = document.createElement("div");
+                imgWrap.className = "dream-img-wrap";
+                if (dream.imageSrc) {
+                    const img = document.createElement("img");
+                    img.src = dream.imageSrc;
+                    img.alt = dream.place;
+                    img.loading = "lazy";
+                    img.decoding = "async";
+                    imgWrap.append(img);
+                } else {
+                    const placeholder = document.createElement("div");
+                    placeholder.className = "dream-img-placeholder";
+                    placeholder.textContent = "📷";
+                    imgWrap.append(placeholder);
+                }
+
+                const place = document.createElement("h3");
+                place.className = "dream-place";
+                place.textContent = dream.place;
+
+                const note = document.createElement("p");
+                note.className = "dream-note";
+                note.textContent = dream.note || "";
+
+                const meta = document.createElement("div");
+                meta.className = "dream-meta";
+
+                const priorityPill = document.createElement("span");
+                priorityPill.className = "pill priority-" + dream.priority;
+                priorityPill.textContent = "Prioridad: " + PRIORITY_LABELS[dream.priority];
+
+                const statusPill = document.createElement("span");
+                statusPill.className = "pill status";
+                statusPill.textContent = "Estado: " + STATUS_LABELS[dream.status];
+
+                meta.append(priorityPill, statusPill);
+
+                const actions = document.createElement("div");
+                actions.className = "dream-actions";
+
+                if (dream.status !== "en_proceso") {
+                    const toProcess = document.createElement("button");
+                    toProcess.type = "button";
+                    toProcess.className = "action-btn";
+                    toProcess.textContent = "Pasar a en proceso";
+                    toProcess.addEventListener("click", () => {
+                        updateStatus(dream.id, "en_proceso");
+                    });
+                    actions.append(toProcess);
+                }
+
+                if (dream.status !== "logrado") {
+                    const toDone = document.createElement("button");
+                    toDone.type = "button";
+                    toDone.className = "action-btn";
+                    toDone.textContent = "Marcar como logrado";
+                    toDone.addEventListener("click", () => {
+                        updateStatus(dream.id, "logrado");
+                        showSuccessMemory();
+                    });
+                    actions.append(toDone);
+                }
+
+                if (dream.status !== "sueno") {
+                    const toDream = document.createElement("button");
+                    toDream.type = "button";
+                    toDream.className = "action-btn";
+                    toDream.textContent = "Volver a sueño";
+                    toDream.addEventListener("click", () => {
+                        updateStatus(dream.id, "sueno");
+                    });
+                    actions.append(toDream);
+                }
+
+                const del = document.createElement("button");
+                del.type = "button";
+                del.className = "action-btn delete";
+                del.textContent = "Eliminar";
+                del.addEventListener("click", () => {
+                    if (!confirm("¿Eliminar este destino del mapa de sueños?")) return;
+                    const next = loadDreams().filter((item) => item.id !== dream.id);
+                    saveDreams(next);
+                    render();
+                    showFlash("Destino eliminado.", "ok");
+                });
+                actions.append(del);
+
+                card.append(imgWrap, place, note, meta, actions);
+                grid.append(card);
+            });
+        }
+
+        function updateStatus(id, status) {
+            const next = loadDreams().map((item) => (
+                item.id === id ? { ...item, status } : item
+            ));
+            saveDreams(next);
+            render();
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideFlash();
+
+            const place = document.getElementById("dreamPlace").value.trim();
+            const priority = document.getElementById("dreamPriority").value;
+            const status = document.getElementById("dreamStatus").value;
+            const note = document.getElementById("dreamNote").value.trim();
+
+            if (!place) {
+                showFlash("Escribe un destino para guardarlo.", "error");
+                return;
+            }
+
+            const file = imageInput.files && imageInput.files[0];
+            if (!file) {
+                showFlash("Sube una imagen del destino.", "error");
+                return;
+            }
+            if (!file.type || !file.type.startsWith("image/")) {
+                showFlash("El archivo debe ser una imagen.", "error");
+                return;
+            }
+            if (file.size > MAX_UPLOAD_BYTES) {
+                showFlash("La imagen supera 1,5 MB. Comprímela o usa una versión más ligera.", "error");
+                return;
+            }
+
+            let imageSrc = "";
+            try {
+                imageSrc = await readFileAsDataURL(file);
+            } catch (_) {
+                showFlash("No se pudo leer la imagen.", "error");
+                return;
+            }
+
+            const newItem = {
+                id: typeof crypto !== "undefined" && crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : "d-" + Date.now() + "-" + Math.random().toString(16).slice(2),
+                place,
+                note,
+                priority: ["alta", "media", "baja"].includes(priority) ? priority : "media",
+                status: ["sueno", "en_proceso", "logrado"].includes(status) ? status : "sueno",
+                imageSrc,
+                createdAt: new Date().toISOString(),
+            };
+
+            const items = loadDreams();
+            items.push(newItem);
+            saveDreams(items);
+            form.reset();
+            if (imageInput) imageInput.value = "";
+            render();
+            showFlash("Destino guardado en tu wishlist emocional.", "ok");
+        });
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                activeFilter = btn.dataset.filter || "todos";
+                filterButtons.forEach((b) => b.classList.remove("is-active"));
+                btn.classList.add("is-active");
+                render();
+            });
+        });
+
+        render();
+    </script>
+</body>
+</html>
