@@ -38,34 +38,96 @@
             padding-bottom: 3rem;
         }
 
-        .top-bar {
-            max-width: 980px;
-            margin: 0 auto 1.25rem;
+        .site-header {
+            width: min(980px, 100%);
+            margin: 0 auto 1rem;
+            padding: 0.7rem 0.85rem;
+            border-radius: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.11);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .site-logo {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: var(--lilac-deep);
+            letter-spacing: 0.01em;
+        }
+
+        .site-nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.55rem;
+            gap: 0.35rem;
             align-items: center;
         }
 
-        .nav-link {
+        .site-nav a {
+            text-decoration: none;
+            color: #5b21b6;
+            font-weight: 600;
+            font-size: 0.93rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .site-nav a:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
+        }
+
+        .site-nav a.active {
+            color: #a855f7;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .auth-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .auth-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            justify-content: center;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--lilac-deep);
-            padding: 0.45rem 0.9rem;
+            border: 1px solid rgba(167, 139, 250, 0.55);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(167, 139, 250, 0.4);
-            box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
-            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            padding: 0.52rem 0.95rem;
+            background: rgba(255, 255, 255, 0.76);
+            color: #6d28d9;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .nav-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+        .auth-btn:hover {
+            transform: scale(1.05);
+            background: rgba(250, 232, 255, 0.95);
+            box-shadow: 0 8px 22px rgba(124, 58, 237, 0.14);
+        }
+
+        .auth-btn.primary {
+            border-color: transparent;
+            background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.18);
+        }
+
+        .auth-btn.primary:hover {
+            box-shadow: 0 14px 32px rgba(124, 58, 237, 0.28);
         }
 
         .shell {
@@ -130,9 +192,12 @@
         }
 
         .form-block {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+            margin-bottom: 0;
+            padding: 1.1rem;
+            border: 1px solid rgba(167, 139, 250, 0.34);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.08);
         }
 
         .form-title {
@@ -210,6 +275,63 @@
             box-shadow: 0 10px 24px rgba(124, 58, 237, 0.3);
         }
 
+        .app-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .dreams-panel {
+            border: 1px solid rgba(167, 139, 250, 0.34);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.08);
+            padding: 1rem;
+        }
+
+        .spotlight-card {
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.1);
+            overflow: hidden;
+            margin-bottom: 0.85rem;
+        }
+
+        .spotlight-media {
+            height: 210px;
+            background: linear-gradient(135deg, var(--lilac-soft), var(--pink-soft));
+            border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+            overflow: hidden;
+        }
+
+        .spotlight-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .spotlight-body {
+            padding: 0.9rem 1rem 1rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .spotlight-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #5b21b6;
+        }
+
+        .spotlight-message {
+            font-size: 0.92rem;
+            color: #6b21a8;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
         .filters {
             margin: 0.8rem 0 1rem;
             display: flex;
@@ -242,6 +364,24 @@
             background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
         }
 
+        .random-btn {
+            border: 1px solid rgba(167, 139, 250, 0.55);
+            border-radius: 999px;
+            padding: 0.42rem 0.92rem;
+            background: rgba(255, 255, 255, 0.82);
+            color: #6d28d9;
+            font-family: inherit;
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .random-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(250, 232, 255, 0.95);
+        }
+
         .dream-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -257,6 +397,13 @@
             display: flex;
             flex-direction: column;
             gap: 0.58rem;
+            animation: dreamCardIn 0.4s ease both;
+            transition: transform 0.2s ease, box-shadow 0.22s ease;
+        }
+
+        .dream-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(124, 58, 237, 0.14);
         }
 
         .dream-img-wrap {
@@ -397,6 +544,33 @@
             transform: translateY(0);
         }
 
+        @keyframes dreamCardIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-nav,
+            .auth-actions {
+                width: 100%;
+            }
+
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 650px) {
             .field-grid {
                 grid-template-columns: 1fr;
@@ -405,65 +579,93 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <a class="nav-link" href="index.html">← Hola Mundo</a>
-        <a class="nav-link" href="agenda-viaje.html">← Agenda</a>
-        <a class="nav-link" href="blog-viajes.html">← Blog viajero</a>
-    </div>
+    <header class="site-header">
+        <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a>
+            <a href="agenda-viaje.html">Agenda</a>
+            <a class="active" href="mapa-suenos.html">Mapa de sueños</a>
+            <a href="blog-viajes.html">Blog</a>
+        </nav>
+        <div class="auth-actions">
+            <a class="auth-btn" href="index.html">Crear perfil</a>
+            <a class="auth-btn primary" href="index.html">Iniciar sesión</a>
+        </div>
+    </header>
 
     <main class="shell">
-        <h1>Mapa de sueños</h1>
+        <h1>Mapa de sueños 🌍</h1>
         <p class="intro">
-            Tu wishlist emocional de destinos: prioriza, avanza y marca tus sueños logrados.
+            Visualiza, organiza y convierte tus destinos soñados en viajes reales
         </p>
 
         <div class="flash" id="flash" role="status" aria-live="polite"></div>
+        <div class="app-layout">
+            <section class="form-block">
+                <h2 class="form-title">Agregar nuevo destino ✨</h2>
+                <form id="dreamForm" novalidate>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="dreamPlace">Destino</label>
+                            <input id="dreamPlace" type="text" maxlength="120" placeholder="Ej: Kioto, Japón" required autocomplete="off">
+                        </div>
+                        <div class="field">
+                            <label for="dreamPriority">Prioridad</label>
+                            <select id="dreamPriority">
+                                <option value="alta">Alta</option>
+                                <option value="media" selected>Media</option>
+                                <option value="baja">Baja</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="dreamStatus">Estado inicial</label>
+                            <select id="dreamStatus">
+                                <option value="sueno" selected>Sueño</option>
+                                <option value="en_proceso">En proceso</option>
+                                <option value="logrado">Logrado</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="dreamMood">Mood del viaje</label>
+                            <select id="dreamMood">
+                                <option value="relax" selected>Relax</option>
+                                <option value="aventura">Aventura</option>
+                                <option value="social">Social</option>
+                                <option value="desconexion">Desconexión</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label for="dreamNote">Nota emocional</label>
+                            <textarea id="dreamNote" maxlength="1000" placeholder="¿Por qué este lugar significa tanto para ti?"></textarea>
+                        </div>
+                        <div class="field full">
+                            <label for="dreamImageFile">Imagen del destino (sube una foto)</label>
+                            <input id="dreamImageFile" name="imageFile" type="file" accept="image/*" required>
+                        </div>
+                    </div>
+                    <button class="submit-btn" type="submit">Guardar sueño</button>
+                </form>
+            </section>
 
-        <section class="form-block">
-            <h2 class="form-title">Agregar destino soñado</h2>
-            <form id="dreamForm" novalidate>
-                <div class="field-grid">
-                    <div class="field">
-                        <label for="dreamPlace">Destino</label>
-                        <input id="dreamPlace" type="text" maxlength="120" placeholder="Ej: Kioto, Japón" required autocomplete="off">
+            <section class="dreams-panel">
+                <article class="spotlight-card" id="dreamSpotlight">
+                    <div class="spotlight-media" id="spotlightMedia"></div>
+                    <div class="spotlight-body">
+                        <h3 class="spotlight-title" id="spotlightTitle">Tu destino destacado</h3>
+                        <p class="spotlight-message" id="spotlightMessage">Añade un destino para visualizar tu próxima gran historia.</p>
                     </div>
-                    <div class="field">
-                        <label for="dreamPriority">Prioridad</label>
-                        <select id="dreamPriority">
-                            <option value="alta">Alta</option>
-                            <option value="media" selected>Media</option>
-                            <option value="baja">Baja</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label for="dreamStatus">Estado inicial</label>
-                        <select id="dreamStatus">
-                            <option value="sueno" selected>Sueño</option>
-                            <option value="en_proceso">En proceso</option>
-                            <option value="logrado">Logrado</option>
-                        </select>
-                    </div>
-                    <div class="field full">
-                        <label for="dreamNote">Nota emocional</label>
-                        <textarea id="dreamNote" maxlength="1000" placeholder="¿Por qué este lugar significa tanto para ti?"></textarea>
-                    </div>
-                    <div class="field full">
-                        <label for="dreamImageFile">Imagen del destino (sube una foto)</label>
-                        <input id="dreamImageFile" name="imageFile" type="file" accept="image/*" required>
-                    </div>
+                </article>
+                <div class="filters" role="tablist" aria-label="Filtro de sueños">
+                    <button class="filter-btn is-active" type="button" data-filter="todos">Todos</button>
+                    <button class="filter-btn" type="button" data-filter="sueno">Sueños</button>
+                    <button class="filter-btn" type="button" data-filter="en_proceso">En proceso</button>
+                    <button class="filter-btn" type="button" data-filter="logrado">Logrados</button>
+                    <button class="random-btn" type="button" id="randomDreamBtn">No sé a dónde ir</button>
                 </div>
-                <button class="submit-btn" type="submit">Guardar en mi mapa</button>
-            </form>
-        </section>
 
-        <div class="filters" role="tablist" aria-label="Filtro de sueños">
-            <button class="filter-btn is-active" type="button" data-filter="todos">Todos</button>
-            <button class="filter-btn" type="button" data-filter="sueno">Sueños</button>
-            <button class="filter-btn" type="button" data-filter="en_proceso">En proceso</button>
-            <button class="filter-btn" type="button" data-filter="logrado">Logrados</button>
+                <div class="dream-grid" id="dreamGrid" aria-live="polite"></div>
+            </section>
         </div>
-
-        <div class="dream-grid" id="dreamGrid" aria-live="polite"></div>
     </main>
 
     <div class="success-pop" id="successPop" role="status" aria-live="polite"></div>
@@ -485,12 +687,74 @@
         const form = document.getElementById("dreamForm");
         const grid = document.getElementById("dreamGrid");
         const imageInput = document.getElementById("dreamImageFile");
+        const moodInput = document.getElementById("dreamMood");
         const flash = document.getElementById("flash");
         const successPop = document.getElementById("successPop");
         const filterButtons = document.querySelectorAll(".filter-btn");
+        const spotlightMedia = document.getElementById("spotlightMedia");
+        const spotlightTitle = document.getElementById("spotlightTitle");
+        const spotlightMessage = document.getElementById("spotlightMessage");
+        const randomDreamBtn = document.getElementById("randomDreamBtn");
         let activeFilter = "todos";
+        let spotlightDreamId = "";
 
         const MAX_UPLOAD_BYTES = Math.floor(1.5 * 1024 * 1024);
+
+        const MOOD_LABELS = {
+            relax: "Relax",
+            aventura: "Aventura",
+            social: "Social",
+            desconexion: "Desconexión",
+        };
+
+        const MOOD_MESSAGES = {
+            relax: "Tu viaje pide calma: respira, baja el ritmo y disfruta sin prisa.",
+            aventura: "Tu energía está alta: este destino te invita a moverte y descubrir.",
+            social: "Tu mood es conexión: vive lugares que se disfrutan mejor en compañía.",
+            desconexion: "Tu mente pide pausa: este destino te ayuda a reconectar contigo.",
+        };
+
+        function normalizeMood(value) {
+            return ["relax", "aventura", "social", "desconexion"].includes(value) ? value : "relax";
+        }
+
+        function getEmotionalMessage(dream) {
+            const mood = normalizeMood(dream?.mood);
+            const status = dream?.status || "sueno";
+            if (status === "logrado") {
+                return "Ya convertiste este sueño en recuerdo. Celebra lo que lograste.";
+            }
+            if (status === "en_proceso") {
+                return "Este destino ya está en marcha. Mantén el foco y sigue avanzando.";
+            }
+            return MOOD_MESSAGES[mood];
+        }
+
+        function updateSpotlightFromDream(dream) {
+            if (!spotlightMedia || !spotlightTitle || !spotlightMessage) return;
+            spotlightMedia.innerHTML = "";
+            if (!dream) {
+                spotlightTitle.textContent = "Tu destino destacado";
+                spotlightMessage.textContent = "Añade un destino para visualizar tu próxima gran historia.";
+                return;
+            }
+            spotlightDreamId = dream.id || "";
+            if (dream.imageSrc) {
+                const img = document.createElement("img");
+                img.src = dream.imageSrc;
+                img.alt = dream.place || "";
+                img.loading = "lazy";
+                img.decoding = "async";
+                spotlightMedia.append(img);
+            } else {
+                const ph = document.createElement("div");
+                ph.className = "dream-img-placeholder";
+                ph.textContent = "📷";
+                spotlightMedia.append(ph);
+            }
+            spotlightTitle.textContent = dream.place || "Destino";
+            spotlightMessage.textContent = getEmotionalMessage(dream);
+        }
 
         function readFileAsDataURL(file) {
             return new Promise((resolve, reject) => {
@@ -531,7 +795,10 @@
                     typeof item.place === "string" &&
                     ["alta", "media", "baja"].includes(item.priority) &&
                     ["sueno", "en_proceso", "logrado"].includes(item.status)
-                ));
+                )).map((item) => ({
+                    ...item,
+                    mood: normalizeMood(item.mood),
+                }));
             } catch (_) {
                 return [];
             }
@@ -565,6 +832,8 @@
         function render() {
             grid.innerHTML = "";
             const dreams = applyFilter(sortDreams(loadDreams()));
+            const spotlight = dreams.find((d) => d.id === spotlightDreamId) || dreams[0] || null;
+            updateSpotlightFromDream(spotlight);
 
             if (dreams.length === 0) {
                 const empty = document.createElement("p");
@@ -615,7 +884,11 @@
                 statusPill.className = "pill status";
                 statusPill.textContent = "Estado: " + STATUS_LABELS[dream.status];
 
-                meta.append(priorityPill, statusPill);
+                const moodPill = document.createElement("span");
+                moodPill.className = "pill status";
+                moodPill.textContent = "Mood: " + MOOD_LABELS[normalizeMood(dream.mood)];
+
+                meta.append(priorityPill, statusPill, moodPill);
 
                 const actions = document.createElement("div");
                 actions.className = "dream-actions";
@@ -668,6 +941,10 @@
                 actions.append(del);
 
                 card.append(imgWrap, place, note, meta, actions);
+                card.addEventListener("click", () => {
+                    spotlightDreamId = dream.id;
+                    updateSpotlightFromDream(dream);
+                });
                 grid.append(card);
             });
         }
@@ -687,6 +964,7 @@
             const place = document.getElementById("dreamPlace").value.trim();
             const priority = document.getElementById("dreamPriority").value;
             const status = document.getElementById("dreamStatus").value;
+            const mood = normalizeMood(moodInput?.value || "relax");
             const note = document.getElementById("dreamNote").value.trim();
 
             if (!place) {
@@ -724,6 +1002,7 @@
                 note,
                 priority: ["alta", "media", "baja"].includes(priority) ? priority : "media",
                 status: ["sueno", "en_proceso", "logrado"].includes(status) ? status : "sueno",
+                mood,
                 imageSrc,
                 createdAt: new Date().toISOString(),
             };
@@ -733,8 +1012,10 @@
             saveDreams(items);
             form.reset();
             if (imageInput) imageInput.value = "";
+            if (moodInput) moodInput.value = "relax";
+            spotlightDreamId = newItem.id;
             render();
-            showFlash("Destino guardado en tu wishlist emocional.", "ok");
+            showFlash("Destino guardado. " + getEmotionalMessage(newItem), "ok");
         });
 
         filterButtons.forEach((btn) => {
@@ -744,6 +1025,18 @@
                 btn.classList.add("is-active");
                 render();
             });
+        });
+
+        randomDreamBtn?.addEventListener("click", () => {
+            const dreams = applyFilter(sortDreams(loadDreams()));
+            if (dreams.length === 0) {
+                showFlash("Aún no hay destinos para elegir al azar.", "error");
+                return;
+            }
+            const chosen = dreams[Math.floor(Math.random() * dreams.length)];
+            spotlightDreamId = chosen.id;
+            updateSpotlightFromDream(chosen);
+            showFlash("Destino sugerido: " + chosen.place + ". " + getEmotionalMessage(chosen), "ok");
         });
 
         render();

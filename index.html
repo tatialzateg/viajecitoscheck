@@ -16,6 +16,8 @@
             --pink: #f472b6;
             --pink-soft: #fbcfe8;
             --cream: #fdf4ff;
+            --text-main: #3b0764;
+            --surface: rgba(255, 255, 255, 0.82);
         }
 
         * {
@@ -27,20 +29,15 @@
         body {
             min-height: 100vh;
             font-family: "Quicksand", system-ui, sans-serif;
-            background: linear-gradient(
-                145deg,
-                var(--cream) 0%,
-                var(--lilac-soft) 35%,
-                var(--pink-soft) 70%,
-                #fce7f3 100%
-            );
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at 10% 15%, rgba(167, 139, 250, 0.22), transparent 45%),
+                radial-gradient(circle at 90% 25%, rgba(244, 114, 182, 0.22), transparent 40%),
+                linear-gradient(145deg, var(--cream) 0%, var(--lilac-soft) 40%, var(--pink-soft) 100%);
             overflow-x: hidden;
             overflow-y: auto;
             position: relative;
+            line-height: 1.5;
         }
 
         .hearts-bg {
@@ -74,57 +71,55 @@
         }
 
         .card {
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.85) 0%,
-                rgba(250, 232, 255, 0.9) 50%,
-                rgba(252, 231, 243, 0.85) 100%
-            );
-            backdrop-filter: blur(12px);
-            padding: clamp(2rem, 6vw, 3.5rem) clamp(2rem, 8vw, 4rem);
-            border-radius: 28px;
-            box-shadow:
-                0 4px 24px rgba(124, 58, 237, 0.12),
-                0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            width: min(1120px, calc(100% - 2rem));
+            margin: 1.1rem auto 1.4rem;
+            border-radius: 30px;
             border: 1px solid rgba(167, 139, 250, 0.35);
-            text-align: center;
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(253, 244, 255, 0.9));
+            box-shadow:
+                0 10px 34px rgba(124, 58, 237, 0.12),
+                0 1px 0 rgba(255, 255, 255, 0.85) inset;
+            backdrop-filter: blur(10px);
             position: relative;
             z-index: 1;
-            width: min(1050px, 100%);
-            margin: 1.25rem 1rem;
+            padding: clamp(1.6rem, 4vw, 2.4rem);
         }
 
-        .hearts-row {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.75rem;
-            filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.35));
+        .landing-shell {
+            display: grid;
+            gap: clamp(1.2rem, 3vw, 1.8rem);
         }
 
-        .hearts-row span {
-            color: var(--lilac-deep);
-            animation: pulse 2s ease-in-out infinite;
+        .landing-section {
+            border-radius: 24px;
+            border: 1px solid rgba(167, 139, 250, 0.24);
+            background: var(--surface);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.07);
+            padding: clamp(1.2rem, 3vw, 1.8rem);
         }
 
-        .hearts-row span:nth-child(2) {
-            animation-delay: 0.2s;
-            color: #5b21b6;
+        .hero-section {
+            text-align: center;
+            padding: clamp(2rem, 5vw, 3.3rem) clamp(1.2rem, 3vw, 2.4rem);
+            background:
+                radial-gradient(circle at 50% -30%, rgba(167, 139, 250, 0.45), transparent 60%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(251, 207, 232, 0.5));
         }
 
-        .hearts-row span:nth-child(3) {
-            animation-delay: 0.4s;
-            color: var(--lilac-deep);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+        .hero-label {
+            display: inline-block;
+            margin-bottom: 0.9rem;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: #6d28d9;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
         }
 
         h1 {
-            font-size: clamp(2rem, 8vw, 3.25rem);
+            font-size: clamp(2rem, 6vw, 3.1rem);
             font-weight: 700;
             background: linear-gradient(
                 120deg,
@@ -139,21 +134,28 @@
         }
 
         .subtitle {
-            margin-top: 0.75rem;
-            font-size: 1rem;
+            margin-top: 0.8rem;
+            font-size: clamp(1rem, 2.7vw, 1.2rem);
             color: #9d174d;
-            opacity: 0.85;
-            font-weight: 500;
+            opacity: 0.95;
+            font-weight: 600;
+            max-width: 44rem;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .love-btn {
-            margin-top: 1.5rem;
+        .hero-main-cta {
+            display: inline-flex;
+            margin-top: 1.4rem;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
             border: none;
             border-radius: 999px;
             padding: 0.8rem 1.4rem;
             font-family: inherit;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #ffffff;
             cursor: pointer;
             background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
@@ -161,12 +163,12 @@
             transition: transform 0.2s ease, box-shadow 0.25s ease;
         }
 
-        .love-btn:hover {
+        .hero-main-cta:hover {
             transform: scale(1.05);
             box-shadow: 0 14px 32px rgba(124, 58, 237, 0.38);
         }
 
-        .love-btn:active {
+        .hero-main-cta:active {
             transform: scale(0.98);
         }
 
@@ -174,6 +176,10 @@
             margin-top: 3.25rem;
             padding-top: 2.5rem;
             border-top: 1px solid rgba(167, 139, 250, 0.28);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .love-btn-xl {
@@ -227,6 +233,94 @@
             font-weight: 800;
             color: #5b21b6;
             opacity: 0.95;
+        }
+
+        .felicidad-stats {
+            margin-top: 1rem;
+            display: grid;
+            gap: 0.75rem;
+            width: min(520px, 100%);
+            margin-left: auto;
+            margin-right: auto;
+            justify-items: center;
+        }
+
+        .felicidad-stat-card {
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 0.75rem 0.9rem;
+            color: #5b21b6;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        .felicidad-goal-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .felicidad-mini-progress {
+            width: 100%;
+            height: 9px;
+            border-radius: 999px;
+            background: rgba(124, 58, 237, 0.12);
+            overflow: hidden;
+        }
+
+        .felicidad-mini-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #7c3aed, #db2777, #f59e0b);
+            transition: width 0.4s ease;
+        }
+
+        .felicidad-history {
+            margin-top: 0.35rem;
+            list-style: none;
+            display: grid;
+            gap: 0.35rem;
+            padding-left: 0;
+        }
+
+        .felicidad-history li {
+            font-size: 0.84rem;
+            color: #6b21a8;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .felicidad-actions {
+            margin-top: 0.85rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .felicidad-secondary-btn {
+            border: 1px solid rgba(167, 139, 250, 0.5);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            color: #6d28d9;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 0.45rem 0.85rem;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .felicidad-secondary-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
         }
 
         .felicidad-toast {
@@ -297,8 +391,14 @@
         }
 
         .site-header {
-            width: min(1050px, 100%);
-            margin: 1.1rem 1rem 0.2rem;
+            width: min(1120px, calc(100% - 2rem));
+            margin: 1.1rem auto 0.4rem;
+            padding: 0.7rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.28);
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.09);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -308,10 +408,33 @@
         }
 
         .site-logo {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--lilac-deep);
             letter-spacing: 0.01em;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .site-nav a {
+            text-decoration: none;
+            color: #5b21b6;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .site-nav a:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
         }
 
         .header-right {
@@ -411,7 +534,7 @@
         }
 
         .hero-nav-block {
-            margin-top: 1.75rem;
+            margin-top: 1.5rem;
             display: flex;
             flex-wrap: wrap;
             gap: 1rem 1.15rem;
@@ -419,16 +542,18 @@
             align-items: center;
         }
 
-        .home-section {
-            margin-top: 2rem;
-            text-align: center;
-        }
-
         .section-title {
-            font-size: 1.15rem;
+            font-size: clamp(1.2rem, 2.7vw, 1.45rem);
             font-weight: 800;
             color: #5b21b6;
             margin-bottom: 0.75rem;
+        }
+
+        .section-lead {
+            color: #6b21a8;
+            font-weight: 600;
+            opacity: 0.9;
+            max-width: 50rem;
         }
 
         .progress-bar-home {
@@ -455,6 +580,102 @@
             color: #4c1d95;
             opacity: 0.95;
             font-weight: 600;
+        }
+
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .mini-card {
+            border-radius: 16px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            background: rgba(255, 255, 255, 0.68);
+            box-shadow: 0 5px 18px rgba(124, 58, 237, 0.08);
+            padding: 0.9rem;
+            text-align: left;
+        }
+
+        .mini-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #5b21b6;
+            margin-bottom: 0.5rem;
+        }
+
+        .mini-help {
+            font-size: 0.86rem;
+            color: #7e22ce;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .mini-input,
+        .mini-textarea {
+            width: 100%;
+            border: 1px solid rgba(167, 139, 250, 0.5);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            font-family: inherit;
+            color: #4c1d95;
+            padding: 0.65rem 0.75rem;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .mini-textarea {
+            resize: vertical;
+            min-height: 84px;
+        }
+
+        .mini-input:focus,
+        .mini-textarea:focus {
+            border-color: rgba(124, 58, 237, 0.7);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .mini-btn {
+            margin-top: 0.55rem;
+            border: 1px solid rgba(167, 139, 250, 0.5);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #6d28d9;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.84rem;
+            padding: 0.45rem 0.85rem;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .mini-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.14);
+        }
+
+        .mini-list {
+            margin-top: 0.55rem;
+            list-style: none;
+            display: grid;
+            gap: 0.35rem;
+            padding-left: 0;
+        }
+
+        .mini-list li {
+            font-size: 0.84rem;
+            color: #6b21a8;
+            font-weight: 600;
+            border: 1px solid rgba(167, 139, 250, 0.25);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.74);
+            padding: 0.45rem 0.55rem;
+        }
+
+        .countdown-strong {
+            color: #5b21b6;
+            font-weight: 900;
+            font-size: 1.15rem;
         }
 
         .section-head-row {
@@ -599,9 +820,82 @@
             line-height: 1.45;
         }
 
+        .about-wrap {
+            display: grid;
+            gap: 1rem;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .about-list {
+            list-style: none;
+            display: grid;
+            gap: 0.65rem;
+            width: min(680px, 100%);
+        }
+
+        .about-list li {
+            border: 1px solid rgba(167, 139, 250, 0.25);
+            border-radius: 14px;
+            padding: 0.7rem 0.85rem;
+            background: rgba(255, 255, 255, 0.66);
+            font-weight: 600;
+            color: #5b21b6;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .action-card {
+            border-radius: 16px;
+            border: 1px solid rgba(167, 139, 250, 0.28);
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.07);
+            padding: 1rem;
+            text-align: left;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.12);
+        }
+
+        .action-card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #5b21b6;
+            margin-bottom: 0.35rem;
+        }
+
+        .action-card p {
+            color: #4c1d95;
+            font-weight: 600;
+            opacity: 0.92;
+            font-size: 0.93rem;
+        }
+
+        .emotional-section {
+            text-align: center;
+            background:
+                linear-gradient(140deg, rgba(124, 58, 237, 0.14), rgba(244, 114, 182, 0.18)),
+                rgba(255, 255, 255, 0.75);
+        }
+
+        .emotional-text {
+            max-width: 45rem;
+            margin: 0 auto;
+            color: #6b21a8;
+            font-size: 1.02rem;
+            font-weight: 600;
+        }
+
         .site-footer {
-            width: min(1050px, 100%);
-            margin: 0 1rem 1.75rem;
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto 1.75rem;
             text-align: center;
             color: #9d174d;
             opacity: 0.9;
@@ -730,7 +1024,25 @@
         }
 
         @media (max-width: 900px) {
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.65rem;
+            }
+
+            .site-nav {
+                width: 100%;
+            }
+
             .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .creative-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -761,11 +1073,6 @@
         }
 
         @media (max-width: 520px) {
-            .site-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .header-right {
                 width: 100%;
                 justify-content: flex-start;
@@ -774,6 +1081,10 @@
             .auth-actions {
                 width: 100%;
                 justify-content: flex-start;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -793,6 +1104,12 @@
 
     <header class="site-header">
         <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a>
+            <a href="agenda-viaje.html">Agenda</a>
+            <a href="mapa-suenos.html">Mapa de sueños</a>
+            <a href="blog-viajes.html">Blog</a>
+        </nav>
         <div class="header-right">
             <div class="user-badge" id="userBadge" aria-live="polite">
                 <img class="user-avatar" id="userAvatarImg" alt="" hidden />
@@ -811,55 +1128,155 @@
     </header>
 
     <main class="card">
-        <h1>ViajecitosCheck</h1>
-        <p class="subtitle">Planeador de viajes</p>
+        <div class="landing-shell">
+            <section class="landing-section hero-section">
+                <span class="hero-label">ViajecitosCheck</span>
+                <h1>Convierte tus sueños de viaje en experiencias reales</h1>
+                <p class="subtitle">Planifica, organiza y cumple cada viaje que imaginas</p>
+                <a class="hero-main-cta" href="agenda-viaje.html">Crear mi próximo viaje ✈️</a>
 
-        <nav class="hero-nav-block" aria-label="Accesos principales">
-            <a class="nav-agenda" href="agenda-viaje.html">✈️ Agenda para mi viaje</a>
-            <a class="nav-agenda" href="blog-viajes.html">📷 Blog viajero</a>
-            <a class="nav-agenda" href="mapa-suenos.html">🌟 Mapa de sueños</a>
-        </nav>
+                <nav class="hero-nav-block" aria-label="Accesos principales">
+                    <a class="nav-agenda" href="agenda-viaje.html">✈️ Agenda para mi viaje</a>
+                    <a class="nav-agenda" href="blog-viajes.html">📷 Blog viajero</a>
+                    <a class="nav-agenda" href="mapa-suenos.html">🌟 Mapa de sueños</a>
+                </nav>
+            </section>
 
-        <section class="felicidad-section home-section">
-            <button type="button" class="love-btn-xl" id="graciasBtn">Felicidad</button>
-            <p class="felicidad-hint">Presiona cada vez que conviertas un sueño en realidad 💛</p>
-            <p class="happiness-counter" id="happinessCounter" aria-live="polite">Momentos de felicidad: 0</p>
-            <div class="felicidad-toast" id="felicidadToast" role="status" aria-live="polite"></div>
-        </section>
-
-        <section class="home-section">
-            <h2 class="section-title">Tu próximo viaje está en proceso ✈️</h2>
-            <div class="progress-bar-home" aria-label="Progreso del destino">
-                <div class="progress-fill-home" id="homeProgressFill" style="width: 0%;"></div>
-            </div>
-            <p class="progress-text" id="homeProgressText">Has avanzado un 0% hacia tu destino</p>
-        </section>
-
-        <section class="home-section">
-            <div class="section-head-row">
-                <h2 class="section-title" style="margin-bottom: 0;">Tus próximos destinos</h2>
-                <a class="pill-link" href="mapa-suenos.html">Ver mapa de sueños</a>
-            </div>
-            <div class="dream-preview-grid" id="dreamPreviewGrid" aria-live="polite"></div>
-        </section>
-
-        <section class="home-section">
-            <h2 class="section-title">Tu viaje, con propósito</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3>✈️ Planea → organiza tu viaje</h3>
-                    <p>Ordena documentos, transporte y checklist en un solo lugar.</p>
+            <section class="landing-section">
+                <div class="about-wrap">
+                    <h2 class="section-title">¿Por qué existe ViajecitosCheck?</h2>
+                    <p class="section-lead">Nace para ayudarte a pasar del "algún día viajo" al "ya tengo un plan". Centraliza tus ideas, tareas y motivación para que cada viaje se vuelva más real, ordenado y emocionante.</p>
+                    <ul class="about-list">
+                        <li>Organizas lo importante antes de salir y reduces estrés.</li>
+                        <li>Visualizas metas claras para no perder el impulso.</li>
+                        <li>Celebras cada avance para sostener tu motivación.</li>
+                    </ul>
                 </div>
-                <div class="benefit-card">
-                    <h3>💰 Avanza → mide tu progreso</h3>
-                    <p>Marca lo que llevas listo y siente el avance.</p>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">¿Qué puedes hacer?</h2>
+                <div class="actions-grid">
+                    <article class="action-card">
+                        <h3>Agenda</h3>
+                        <p>Controla checklist, documentos, tiempos y pendientes esenciales del viaje.</p>
+                    </article>
+                    <article class="action-card">
+                        <h3>Mapa de sueños</h3>
+                        <p>Guarda destinos soñados, prioriza ideas y visualiza próximos pasos.</p>
+                    </article>
+                    <article class="action-card">
+                        <h3>Progreso</h3>
+                        <p>Mide tu avance real con una barra que se actualiza desde tu agenda.</p>
+                    </article>
+                    <article class="action-card">
+                        <h3>Felicidad</h3>
+                        <p>Registra cada logro y convierte tu proceso en una experiencia positiva.</p>
+                    </article>
                 </div>
-                <div class="benefit-card">
-                    <h3>💛 Cumple → celebra tu logro</h3>
-                    <p>Cuando un sueño se cumple, celebras con intención.</p>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">Tu próximo viaje está en proceso ✈️</h2>
+                <div class="progress-bar-home" aria-label="Progreso del destino">
+                    <div class="progress-fill-home" id="homeProgressFill" style="width: 0%;"></div>
                 </div>
-            </div>
-        </section>
+                <p class="progress-text" id="homeProgressText">Has avanzado un 0% hacia tu destino</p>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">Impulso creativo de tu viaje</h2>
+                <div class="creative-grid">
+                    <article class="mini-card">
+                        <h3 class="mini-title">Cuenta regresiva</h3>
+                        <p class="mini-help">Define la fecha de tu viaje y recibe mensajes según la cercanía.</p>
+                        <input class="mini-input" id="countdownDateInput" type="date" />
+                        <button class="mini-btn" type="button" id="countdownSaveBtn">Guardar fecha</button>
+                        <p class="progress-text"><span class="countdown-strong" id="countdownDays">--</span></p>
+                        <p class="mini-help" id="countdownMessage">Aún no has elegido una fecha de viaje.</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3 class="mini-title">Mensaje para tu futuro yo</h3>
+                        <textarea class="mini-textarea" id="futureSelfInput" placeholder="Escribe lo que quieres recordar cuando llegue ese gran viaje..."></textarea>
+                        <button class="mini-btn" type="button" id="futureSelfSaveBtn">Guardar mensaje</button>
+                        <button class="mini-btn" type="button" id="futureSelfRevealBtn">Mostrar mensaje</button>
+                        <p class="mini-help" id="futureSelfOutput">Sin mensaje aún.</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3 class="mini-title">Momentos de viaje</h3>
+                        <input class="mini-input" id="momentInput" type="text" maxlength="120" placeholder="Ej: Vi el amanecer en la playa" />
+                        <button class="mini-btn" type="button" id="momentAddBtn">Guardar momento</button>
+                        <ul class="mini-list" id="momentsList"></ul>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3 class="mini-title">Retos viajeros</h3>
+                        <p class="mini-help" id="retosProgress">Progreso: 0 / 0</p>
+                        <ul class="mini-list" id="retosList"></ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="landing-section emotional-section">
+                <h2 class="section-title">No es solo una app de viajes</h2>
+                <p class="emotional-text">Es un espacio para transformar intención en movimiento. Cada lista marcada, cada destino guardado y cada momento celebrado te acerca a la vida que quieres vivir.</p>
+            </section>
+
+            <section class="landing-section">
+                <div class="section-head-row">
+                    <h2 class="section-title" style="margin-bottom: 0;">Tus próximos destinos</h2>
+                    <a class="pill-link" href="mapa-suenos.html">Ver mapa de sueños</a>
+                </div>
+                <div class="dream-preview-grid" id="dreamPreviewGrid" aria-live="polite"></div>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">Tu viaje, con propósito</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h3>✈️ Planea → organiza tu viaje</h3>
+                        <p>Ordena documentos, transporte y checklist en un solo lugar.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>💰 Avanza → mide tu progreso</h3>
+                        <p>Marca lo que llevas listo y siente el avance.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>💛 Cumple → celebra tu logro</h3>
+                        <p>Cuando un sueño se cumple, celebras con intención.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="landing-section felicidad-section">
+                <button type="button" class="love-btn-xl" id="graciasBtn">Felicidad</button>
+                <p class="felicidad-hint">Presiona cada vez que conviertas un sueño en realidad 💛</p>
+                <p class="happiness-counter" id="happinessCounter" aria-live="polite">Momentos de felicidad: 0</p>
+                <div class="felicidad-stats">
+                    <div class="felicidad-stat-card">
+                        <div class="felicidad-goal-row">
+                            <span>Meta de hoy</span>
+                            <strong id="felicidadGoalLabel">0 / 3</strong>
+                        </div>
+                        <div class="felicidad-mini-progress" aria-hidden="true">
+                            <div class="felicidad-mini-progress-fill" id="felicidadGoalFill"></div>
+                        </div>
+                    </div>
+                    <div class="felicidad-stat-card" id="felicidadStreak">Racha actual: 0 días</div>
+                    <div class="felicidad-stat-card" id="felicidadLastMoment">Último momento: Aún no registrado</div>
+                    <div class="felicidad-stat-card">
+                        <span>Últimos momentos</span>
+                        <ul class="felicidad-history" id="felicidadHistoryList"></ul>
+                    </div>
+                </div>
+                <div class="felicidad-actions">
+                    <button type="button" class="felicidad-secondary-btn" id="felicidadResetBtn">Reiniciar contador</button>
+                </div>
+                <div class="felicidad-toast" id="felicidadToast" role="status" aria-live="polite"></div>
+            </section>
+        </div>
     </main>
 
     <footer class="site-footer">
@@ -890,10 +1307,70 @@
 
     <script>
         const HAPPINESS_KEY = "devtata-felicidad-count";
+        const HAPPINESS_META_KEY = "devtata-felicidad-meta";
+        const DAILY_HAPPINESS_GOAL = 3;
         const graciasBtn = document.getElementById("graciasBtn");
         const happinessCounter = document.getElementById("happinessCounter");
         const felicidadToast = document.getElementById("felicidadToast");
+        const felicidadGoalLabel = document.getElementById("felicidadGoalLabel");
+        const felicidadGoalFill = document.getElementById("felicidadGoalFill");
+        const felicidadStreak = document.getElementById("felicidadStreak");
+        const felicidadLastMoment = document.getElementById("felicidadLastMoment");
+        const felicidadHistoryList = document.getElementById("felicidadHistoryList");
+        const felicidadResetBtn = document.getElementById("felicidadResetBtn");
         let felicidadToastTimer = null;
+
+        function getTodayKey() {
+            const d = new Date();
+            const m = String(d.getMonth() + 1).padStart(2, "0");
+            const day = String(d.getDate()).padStart(2, "0");
+            return d.getFullYear() + "-" + m + "-" + day;
+        }
+
+        function loadHappinessMeta() {
+            try {
+                const raw = localStorage.getItem(HAPPINESS_META_KEY);
+                const parsed = raw ? JSON.parse(raw) : null;
+                const days = parsed && typeof parsed.days === "object" ? parsed.days : {};
+                const history = parsed && Array.isArray(parsed.history) ? parsed.history.slice(0, 20) : [];
+                const lastIso = parsed && typeof parsed.lastIso === "string" ? parsed.lastIso : "";
+                return { days, history, lastIso };
+            } catch (_) {
+                return { days: {}, history: [], lastIso: "" };
+            }
+        }
+
+        function saveHappinessMeta(meta) {
+            localStorage.setItem(HAPPINESS_META_KEY, JSON.stringify(meta));
+        }
+
+        function formatHumanDate(iso) {
+            if (!iso) return "Aún no registrado";
+            const d = new Date(iso);
+            if (Number.isNaN(d.getTime())) return "Aún no registrado";
+            return d.toLocaleString("es-CO", {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        }
+
+        function computeStreak(days) {
+            let streak = 0;
+            const cursor = new Date();
+            cursor.setHours(0, 0, 0, 0);
+            while (true) {
+                const m = String(cursor.getMonth() + 1).padStart(2, "0");
+                const day = String(cursor.getDate()).padStart(2, "0");
+                const key = cursor.getFullYear() + "-" + m + "-" + day;
+                if (!days[key] || days[key] <= 0) break;
+                streak += 1;
+                cursor.setDate(cursor.getDate() - 1);
+            }
+            return streak;
+        }
 
         function loadHappinessCount() {
             try {
@@ -910,8 +1387,41 @@
 
         function updateHappinessUI() {
             const n = loadHappinessCount();
+            const meta = loadHappinessMeta();
+            const todayKey = getTodayKey();
+            const todayCount = Number(meta.days[todayKey] || 0);
+            const safeTodayCount = Number.isFinite(todayCount) && todayCount > 0 ? todayCount : 0;
+            const streak = computeStreak(meta.days);
             if (happinessCounter) {
                 happinessCounter.textContent = "Momentos de felicidad: " + n;
+            }
+            if (felicidadGoalLabel) {
+                felicidadGoalLabel.textContent = safeTodayCount + " / " + DAILY_HAPPINESS_GOAL;
+            }
+            if (felicidadGoalFill) {
+                const width = Math.min(100, Math.round((safeTodayCount / DAILY_HAPPINESS_GOAL) * 100));
+                felicidadGoalFill.style.width = width + "%";
+            }
+            if (felicidadStreak) {
+                felicidadStreak.textContent = "Racha actual: " + streak + " día" + (streak === 1 ? "" : "s");
+            }
+            if (felicidadLastMoment) {
+                felicidadLastMoment.textContent = "Último momento: " + formatHumanDate(meta.lastIso);
+            }
+            if (felicidadHistoryList) {
+                felicidadHistoryList.innerHTML = "";
+                const recent = meta.history.slice(0, 5);
+                if (recent.length === 0) {
+                    const li = document.createElement("li");
+                    li.textContent = "Aún no has registrado momentos.";
+                    felicidadHistoryList.append(li);
+                } else {
+                    recent.forEach((item) => {
+                        const li = document.createElement("li");
+                        li.textContent = "✨ " + formatHumanDate(item);
+                        felicidadHistoryList.append(li);
+                    });
+                }
             }
         }
 
@@ -951,8 +1461,33 @@
 
             const next = loadHappinessCount() + 1;
             saveHappinessCount(next);
+            const meta = loadHappinessMeta();
+            const nowIso = new Date().toISOString();
+            const todayKey = getTodayKey();
+            const prevDayCount = Number(meta.days[todayKey] || 0);
+            meta.days[todayKey] = (Number.isFinite(prevDayCount) ? prevDayCount : 0) + 1;
+            meta.lastIso = nowIso;
+            meta.history.unshift(nowIso);
+            meta.history = meta.history.slice(0, 20);
+            saveHappinessMeta(meta);
             updateHappinessUI();
             showFelicidadToast();
+        });
+
+        felicidadResetBtn?.addEventListener("click", () => {
+            const ok = window.confirm("¿Seguro que quieres reiniciar tus momentos de felicidad?");
+            if (!ok) return;
+            saveHappinessCount(0);
+            saveHappinessMeta({ days: {}, history: [], lastIso: "" });
+            updateHappinessUI();
+            if (felicidadToast) {
+                felicidadToast.textContent = "Contador reiniciado";
+                felicidadToast.classList.add("is-visible");
+                if (felicidadToastTimer) clearTimeout(felicidadToastTimer);
+                felicidadToastTimer = setTimeout(() => {
+                    felicidadToast.classList.remove("is-visible");
+                }, 1800);
+            }
         });
 
         // ===== Home: Progreso dinámico (desde agenda-viaje) =====
@@ -998,6 +1533,238 @@
         }
 
         computeHomeProgress();
+
+        // ===== Home: Módulos creativos =====
+        const COUNTDOWN_KEY = "devtata-home-countdown";
+        const FUTURE_SELF_KEY = "devtata-home-future-self";
+        const MOMENTS_KEY = "devtata-home-moments";
+        const RETOS_KEY = "devtata-home-retos";
+
+        const countdownDateInput = document.getElementById("countdownDateInput");
+        const countdownSaveBtn = document.getElementById("countdownSaveBtn");
+        const countdownDays = document.getElementById("countdownDays");
+        const countdownMessage = document.getElementById("countdownMessage");
+
+        const futureSelfInput = document.getElementById("futureSelfInput");
+        const futureSelfSaveBtn = document.getElementById("futureSelfSaveBtn");
+        const futureSelfRevealBtn = document.getElementById("futureSelfRevealBtn");
+        const futureSelfOutput = document.getElementById("futureSelfOutput");
+
+        const momentInput = document.getElementById("momentInput");
+        const momentAddBtn = document.getElementById("momentAddBtn");
+        const momentsList = document.getElementById("momentsList");
+
+        const retosList = document.getElementById("retosList");
+        const retosProgress = document.getElementById("retosProgress");
+
+        const DEFAULT_RETOS = [
+            { id: "r1", text: "Probar una comida local nueva", done: false },
+            { id: "r2", text: "Tomar una foto al amanecer", done: false },
+            { id: "r3", text: "Hablar con alguien del lugar", done: false },
+            { id: "r4", text: "Caminar sin mapa por 20 minutos", done: false },
+        ];
+
+        function startOfToday() {
+            const d = new Date();
+            d.setHours(0, 0, 0, 0);
+            return d;
+        }
+
+        function daysUntil(dateIso) {
+            const target = new Date(dateIso + "T00:00:00");
+            if (Number.isNaN(target.getTime())) return null;
+            const diff = target.getTime() - startOfToday().getTime();
+            return Math.ceil(diff / (1000 * 60 * 60 * 24));
+        }
+
+        function countdownTextFromDays(days) {
+            if (days === null) return "Aún no has elegido una fecha de viaje.";
+            if (days < 0) return "Tu fecha ya pasó. Crea una nueva aventura.";
+            if (days === 0) return "Es hoy. Vive el viaje con presencia.";
+            if (days <= 7) return "Falta muy poco. Tu aventura está a la vuelta.";
+            if (days <= 30) return "Tu viaje ya se siente cerca. Sigue preparando detalles.";
+            return "Cada semana cuenta. Tu próximo destino te espera.";
+        }
+
+        function loadCountdown() {
+            try {
+                const raw = localStorage.getItem(COUNTDOWN_KEY);
+                const data = raw ? JSON.parse(raw) : null;
+                return data && typeof data.date === "string" ? data : { date: "" };
+            } catch (_) {
+                return { date: "" };
+            }
+        }
+
+        function saveCountdown(date) {
+            localStorage.setItem(COUNTDOWN_KEY, JSON.stringify({ date }));
+        }
+
+        function renderCountdown() {
+            const data = loadCountdown();
+            if (countdownDateInput && data.date) countdownDateInput.value = data.date;
+            const days = data.date ? daysUntil(data.date) : null;
+            if (countdownDays) {
+                countdownDays.textContent = days === null ? "--" : (days >= 0 ? "Faltan " + days + " día(s)" : "Fecha vencida");
+            }
+            if (countdownMessage) {
+                countdownMessage.textContent = countdownTextFromDays(days);
+            }
+            return days;
+        }
+
+        countdownSaveBtn?.addEventListener("click", () => {
+            const date = (countdownDateInput?.value || "").trim();
+            if (!date) return;
+            saveCountdown(date);
+            renderCountdown();
+        });
+
+        function loadFutureSelf() {
+            try {
+                const raw = localStorage.getItem(FUTURE_SELF_KEY);
+                const data = raw ? JSON.parse(raw) : null;
+                if (!data || typeof data.message !== "string") return { message: "", revealedAt: "", autoShownForDate: "" };
+                return {
+                    message: data.message,
+                    revealedAt: typeof data.revealedAt === "string" ? data.revealedAt : "",
+                    autoShownForDate: typeof data.autoShownForDate === "string" ? data.autoShownForDate : "",
+                };
+            } catch (_) {
+                return { message: "", revealedAt: "", autoShownForDate: "" };
+            }
+        }
+
+        function saveFutureSelf(payload) {
+            localStorage.setItem(FUTURE_SELF_KEY, JSON.stringify(payload));
+        }
+
+        function renderFutureSelf() {
+            const fs = loadFutureSelf();
+            if (futureSelfOutput) {
+                futureSelfOutput.textContent = fs.message ? "Mensaje guardado. Puedes revelarlo cuando quieras." : "Sin mensaje aún.";
+            }
+        }
+
+        futureSelfSaveBtn?.addEventListener("click", () => {
+            const message = (futureSelfInput?.value || "").trim();
+            if (!message) return;
+            saveFutureSelf({ message, revealedAt: "", autoShownForDate: "" });
+            if (futureSelfOutput) futureSelfOutput.textContent = "Mensaje guardado para tu futuro yo.";
+            if (futureSelfInput) futureSelfInput.value = "";
+        });
+
+        futureSelfRevealBtn?.addEventListener("click", () => {
+            const fs = loadFutureSelf();
+            if (!futureSelfOutput) return;
+            if (!fs.message) {
+                futureSelfOutput.textContent = "Aún no has escrito un mensaje.";
+                return;
+            }
+            fs.revealedAt = new Date().toISOString();
+            saveFutureSelf(fs);
+            futureSelfOutput.textContent = fs.message;
+        });
+
+        function maybeAutoRevealFutureSelf() {
+            const days = renderCountdown();
+            if (days !== 0) return;
+            const fs = loadFutureSelf();
+            const today = getTodayKey();
+            if (!fs.message || fs.autoShownForDate === today) return;
+            fs.autoShownForDate = today;
+            fs.revealedAt = new Date().toISOString();
+            saveFutureSelf(fs);
+            if (futureSelfOutput) futureSelfOutput.textContent = fs.message;
+        }
+
+        function loadMoments() {
+            try {
+                const raw = localStorage.getItem(MOMENTS_KEY);
+                const data = raw ? JSON.parse(raw) : [];
+                return Array.isArray(data) ? data.filter((i) => i && typeof i.text === "string").slice(0, 20) : [];
+            } catch (_) {
+                return [];
+            }
+        }
+
+        function saveMoments(items) {
+            localStorage.setItem(MOMENTS_KEY, JSON.stringify(items));
+        }
+
+        function renderMoments() {
+            if (!momentsList) return;
+            momentsList.innerHTML = "";
+            const items = loadMoments().slice(0, 6);
+            if (items.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "Aún no has guardado momentos.";
+                momentsList.append(li);
+                return;
+            }
+            items.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = item.text;
+                momentsList.append(li);
+            });
+        }
+
+        momentAddBtn?.addEventListener("click", () => {
+            const text = (momentInput?.value || "").trim();
+            if (!text) return;
+            const items = loadMoments();
+            items.unshift({ text, createdAt: new Date().toISOString() });
+            saveMoments(items.slice(0, 20));
+            if (momentInput) momentInput.value = "";
+            renderMoments();
+        });
+
+        function loadRetos() {
+            try {
+                const raw = localStorage.getItem(RETOS_KEY);
+                const parsed = raw ? JSON.parse(raw) : null;
+                if (!Array.isArray(parsed) || parsed.length === 0) return DEFAULT_RETOS;
+                return parsed.map((r) => ({
+                    id: String(r.id || ""),
+                    text: String(r.text || ""),
+                    done: Boolean(r.done),
+                })).filter((r) => r.id && r.text);
+            } catch (_) {
+                return DEFAULT_RETOS;
+            }
+        }
+
+        function saveRetos(items) {
+            localStorage.setItem(RETOS_KEY, JSON.stringify(items));
+        }
+
+        function renderRetos() {
+            if (!retosList || !retosProgress) return;
+            retosList.innerHTML = "";
+            const retos = loadRetos();
+            const done = retos.filter((r) => r.done).length;
+            retosProgress.textContent = "Progreso: " + done + " / " + retos.length;
+            retos.forEach((reto) => {
+                const li = document.createElement("li");
+                const cb = document.createElement("input");
+                cb.type = "checkbox";
+                cb.checked = reto.done;
+                cb.style.marginRight = "0.4rem";
+                cb.addEventListener("change", () => {
+                    const next = loadRetos().map((r) => r.id === reto.id ? { ...r, done: cb.checked } : r);
+                    saveRetos(next);
+                    renderRetos();
+                });
+                li.append(cb, document.createTextNode(reto.text));
+                retosList.append(li);
+            });
+        }
+
+        renderCountdown();
+        renderFutureSelf();
+        renderMoments();
+        renderRetos();
+        maybeAutoRevealFutureSelf();
 
         // ===== Home: Preview del Mapa de sueños (desde localStorage) =====
         const DREAM_STORAGE_KEY = "devtata-dream-map";
@@ -1088,6 +1855,10 @@
             if (!document.hidden) {
                 computeHomeProgress();
                 renderDreamPreview();
+                renderCountdown();
+                maybeAutoRevealFutureSelf();
+                renderMoments();
+                renderRetos();
             }
         });
 

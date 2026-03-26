@@ -38,40 +38,92 @@
             padding-bottom: 3rem;
         }
 
-        .top-bar {
-            max-width: 960px;
-            margin: 0 auto 1.25rem;
+        .site-header {
+            width: min(960px, 100%);
+            margin: 0 auto 1rem;
+            padding: 0.7rem 0.85rem;
+            border-radius: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.11);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .site-logo {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: var(--lilac-deep);
+            letter-spacing: 0.01em;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .site-nav a {
+            text-decoration: none;
+            color: #5b21b6;
+            font-weight: 600;
+            font-size: 0.93rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .site-nav a:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
+        }
+
+        .site-nav a.active {
+            color: #a855f7;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .auth-actions {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 0.65rem;
+            gap: 0.55rem;
         }
 
-        .top-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .back-link {
+        .auth-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            justify-content: center;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--lilac-deep);
-            padding: 0.45rem 0.9rem;
+            border: 1px solid rgba(167, 139, 250, 0.55);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(167, 139, 250, 0.4);
-            box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
-            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            padding: 0.52rem 0.95rem;
+            background: rgba(255, 255, 255, 0.76);
+            color: #6d28d9;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .back-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+        .auth-btn:hover {
+            transform: scale(1.05);
+            background: rgba(250, 232, 255, 0.95);
+            box-shadow: 0 8px 22px rgba(124, 58, 237, 0.14);
+        }
+
+        .auth-btn.primary {
+            border-color: transparent;
+            background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.18);
         }
 
         .shell {
@@ -108,6 +160,7 @@
             opacity: 0.9;
             line-height: 1.5;
             margin-bottom: 1rem;
+            max-width: 45rem;
         }
 
         .note {
@@ -147,9 +200,12 @@
         }
 
         .form-block {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+            margin-bottom: 0;
+            padding: 1.1rem;
+            border: 1px solid rgba(167, 139, 250, 0.34);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.08);
         }
 
         .form-block h2 {
@@ -160,7 +216,7 @@
         }
 
         .field {
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.95rem;
         }
 
         .field label {
@@ -176,7 +232,7 @@
         .field input[type="file"],
         .field textarea {
             width: 100%;
-            padding: 0.7rem 0.85rem;
+            padding: 0.82rem 0.9rem;
             border-radius: 14px;
             border: 1px solid rgba(167, 139, 250, 0.45);
             outline: none;
@@ -228,6 +284,21 @@
             margin-bottom: 1rem;
         }
 
+        .blog-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 350px) minmax(0, 1fr);
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .posts-panel {
+            border: 1px solid rgba(167, 139, 250, 0.34);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.08);
+            padding: 1rem;
+        }
+
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -242,6 +313,13 @@
             box-shadow: 0 4px 18px rgba(124, 58, 237, 0.08);
             display: flex;
             flex-direction: column;
+            animation: postCardIn 0.42s ease both;
+            transition: transform 0.2s ease, box-shadow 0.22s ease;
+        }
+
+        .post-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(124, 58, 237, 0.14);
         }
 
         .post-card .post-img-wrap {
@@ -255,6 +333,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.28s ease;
+        }
+
+        .post-card:hover img {
+            transform: scale(1.04);
         }
 
         .post-card .post-body {
@@ -318,21 +401,54 @@
             border: 1px dashed rgba(167, 139, 250, 0.45);
             background: rgba(255, 255, 255, 0.45);
         }
+
+        @keyframes postCardIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-nav,
+            .auth-actions {
+                width: 100%;
+            }
+
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-links">
-            <a class="back-link" href="index.html">← Hola Mundo</a>
-            <a class="back-link" href="agenda-viaje.html">← Agenda de viaje</a>
-            <a class="back-link" href="mapa-suenos.html">← Mapa de sueños</a>
+    <header class="site-header">
+        <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a>
+            <a href="agenda-viaje.html">Agenda</a>
+            <a href="mapa-suenos.html">Mapa de sueños</a>
+            <a class="active" href="blog-viajes.html">Blog</a>
+        </nav>
+        <div class="auth-actions">
+            <a class="auth-btn" href="index.html">Crear perfil</a>
+            <a class="auth-btn primary" href="index.html">Iniciar sesión</a>
         </div>
-    </div>
+    </header>
 
     <main class="shell">
-        <h1>Blog viajero</h1>
+        <h1>Tu diario de viajes 📸</h1>
         <p class="intro">
-            Guarda fotos y recuerdos de tus viajes. Todo se guarda solo en este navegador.
+            Guarda momentos, historias y recuerdos de cada lugar que visites
         </p>
         <p class="note">
             Las fotos que subas desde tu PC se guardan como datos en el navegador (localStorage), con un límite aproximado de ~5 MB en total.
@@ -342,31 +458,35 @@
 
         <div class="flash" id="flash" role="status"></div>
 
-        <section class="form-block" aria-labelledby="form-title">
-            <h2 id="form-title">Nueva entrada</h2>
-            <form id="postForm" novalidate>
-                <div class="field">
-                    <label for="postTitle">Título</label>
-                    <input id="postTitle" name="title" type="text" required maxlength="120" placeholder="Ej: Atardecer en Cartagena" autocomplete="off" />
-                </div>
-                <div class="field">
-                    <label for="postCaption">Descripción</label>
-                    <textarea id="postCaption" name="caption" maxlength="2000" placeholder="Qué hiciste, con quién, un dato del lugar…"></textarea>
-                </div>
-                <div class="field">
-                    <label for="postImageUrl">URL de la imagen (opcional si subes archivo)</label>
-                    <input id="postImageUrl" name="imageUrl" type="url" inputmode="url" placeholder="https://…" />
-                </div>
-                <div class="field">
-                    <label for="postImageFile">Subir imagen desde tu PC</label>
-                    <input id="postImageFile" name="imageFile" type="file" accept="image/*" />
-                </div>
-                <button class="submit-btn" type="submit">Publicar entrada</button>
-            </form>
-        </section>
+        <div class="blog-layout">
+            <section class="form-block" aria-labelledby="form-title">
+                <h2 id="form-title">Nueva historia ✨</h2>
+                <form id="postForm" novalidate>
+                    <div class="field">
+                        <label for="postTitle">Título</label>
+                        <input id="postTitle" name="title" type="text" required maxlength="120" placeholder="Ej: Atardecer en Cartagena" autocomplete="off" />
+                    </div>
+                    <div class="field">
+                        <label for="postCaption">Descripción</label>
+                        <textarea id="postCaption" name="caption" maxlength="2000" placeholder="Qué hiciste, con quién, un dato del lugar…"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="postImageUrl">URL de la imagen (opcional si subes archivo)</label>
+                        <input id="postImageUrl" name="imageUrl" type="url" inputmode="url" placeholder="https://…" />
+                    </div>
+                    <div class="field">
+                        <label for="postImageFile">Subir imagen desde tu PC</label>
+                        <input id="postImageFile" name="imageFile" type="file" accept="image/*" />
+                    </div>
+                    <button class="submit-btn" type="submit">Guardar recuerdo</button>
+                </form>
+            </section>
 
-        <h2 class="gallery-title">Mis viajes</h2>
-        <div class="blog-grid" id="blogGrid" aria-live="polite"></div>
+            <section class="posts-panel">
+                <h2 class="gallery-title">Mis viajes</h2>
+                <div class="blog-grid" id="blogGrid" aria-live="polite"></div>
+            </section>
+        </div>
     </main>
 
     <script>

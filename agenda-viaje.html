@@ -38,47 +38,106 @@
             padding-bottom: 3rem;
         }
 
-        .top-bar {
-            max-width: 720px;
-            margin: 0 auto 1.25rem;
+        .site-header {
+            width: min(980px, 100%);
+            margin: 0 auto 1rem;
+            padding: 0.7rem 0.85rem;
+            border-radius: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.11);
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 0.75rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
         }
 
-        .top-links {
+        .site-logo {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: var(--lilac-deep);
+            letter-spacing: 0.01em;
+        }
+
+        .site-nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.35rem;
             align-items: center;
         }
 
-        .back-link {
+        .site-nav a {
+            text-decoration: none;
+            color: #5b21b6;
+            font-weight: 600;
+            font-size: 0.93rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .site-nav a:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
+        }
+
+        .site-nav a.active {
+            color: #a855f7;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .auth-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .auth-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            justify-content: center;
             text-decoration: none;
-            font-weight: 600;
-            color: var(--lilac-deep);
-            padding: 0.45rem 0.9rem;
+            border: 1px solid rgba(167, 139, 250, 0.55);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(167, 139, 250, 0.4);
-            box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
-            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            padding: 0.52rem 0.95rem;
+            background: rgba(255, 255, 255, 0.76);
+            color: #6d28d9;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .back-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+        .auth-btn:hover {
+            transform: scale(1.05);
+            background: rgba(250, 232, 255, 0.95);
+            box-shadow: 0 8px 22px rgba(124, 58, 237, 0.14);
         }
 
-        .progress-wrap {
-            flex: 1;
-            min-width: 200px;
-            max-width: 320px;
+        .auth-btn.primary {
+            border-color: transparent;
+            background: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.18);
+        }
+
+        .auth-btn.primary:hover {
+            box-shadow: 0 14px 32px rgba(124, 58, 237, 0.28);
+        }
+
+        .agenda-progress-panel {
+            width: min(980px, 100%);
+            margin: 0 auto 1.15rem;
+            border-radius: 18px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            background: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 5px 18px rgba(124, 58, 237, 0.08);
+            padding: 0.8rem 0.95rem;
         }
 
         .progress-label {
@@ -105,7 +164,7 @@
         }
 
         .shell {
-            max-width: 720px;
+            max-width: 980px;
             margin: 0 auto;
             background: linear-gradient(
                 135deg,
@@ -176,12 +235,50 @@
         }
 
         .list input[type="checkbox"] {
-            width: 1.15rem;
-            height: 1.15rem;
-            margin-top: 0.15rem;
-            accent-color: var(--lilac-deep);
+            width: 1.28rem;
+            height: 1.28rem;
+            margin-top: 0.1rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border: 2px solid rgba(124, 58, 237, 0.62);
+            border-radius: 0.42rem;
+            background: rgba(255, 255, 255, 0.95);
             flex-shrink: 0;
             cursor: pointer;
+            display: grid;
+            place-content: center;
+            transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 10px rgba(124, 58, 237, 0.1);
+        }
+
+        .list input[type="checkbox"]::before {
+            content: "";
+            width: 0.35rem;
+            height: 0.65rem;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            transform: rotate(45deg) scale(0);
+            transform-origin: center;
+            transition: transform 0.15s ease;
+            margin-top: -0.05rem;
+        }
+
+        .list input[type="checkbox"]:hover {
+            transform: scale(1.05);
+        }
+
+        .list input[type="checkbox"]:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+        }
+
+        .list input[type="checkbox"]:checked {
+            border-color: transparent;
+            background: linear-gradient(130deg, #7c3aed 0%, #db2777 100%);
+        }
+
+        .list input[type="checkbox"]:checked::before {
+            transform: rotate(45deg) scale(1);
         }
 
         .list label {
@@ -193,6 +290,72 @@
             text-decoration: line-through;
             opacity: 0.65;
             color: #7c3aed;
+        }
+
+        .agenda-dashboard-header {
+            margin-bottom: 1.4rem;
+            padding: 1.1rem 1.15rem;
+            border-radius: 18px;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(252, 231, 243, 0.55));
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.09);
+        }
+
+        .agenda-dashboard-title {
+            font-size: clamp(1.12rem, 3.2vw, 1.42rem);
+            font-weight: 800;
+            color: #5b21b6;
+            margin-bottom: 0.35rem;
+        }
+
+        .agenda-dashboard-subtitle {
+            font-size: 0.95rem;
+            color: #86198f;
+            opacity: 0.9;
+            line-height: 1.45;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .check-card {
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            border-radius: 20px;
+            box-shadow: 0 6px 22px rgba(124, 58, 237, 0.1);
+            padding: 1rem 1rem 1.05rem;
+            animation: cardFadeIn 0.55s ease both;
+            transition: transform 0.2s ease, box-shadow 0.22s ease;
+        }
+
+        .check-card:nth-child(2) { animation-delay: 0.06s; }
+        .check-card:nth-child(3) { animation-delay: 0.12s; }
+        .check-card:nth-child(4) { animation-delay: 0.18s; }
+
+        .check-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(124, 58, 237, 0.14);
+        }
+
+        .check-card h2 {
+            border-bottom: none;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .tools {
@@ -386,7 +549,26 @@
             height: 10px;
         }
 
+        @media (max-width: 700px) {
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-nav {
+                width: 100%;
+            }
+
+            .auth-actions {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 560px) {
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+
             .budget-grid {
                 grid-template-columns: 1fr;
             }
@@ -402,19 +584,26 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-links">
-            <a class="back-link" href="index.html">← Volver a Hola Mundo</a>
-            <a class="back-link" href="blog-viajes.html">Blog viajero</a>
-            <a class="back-link" href="mapa-suenos.html">Mapa de sueños</a>
+    <header class="site-header">
+        <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a>
+            <a class="active" href="agenda-viaje.html">Agenda</a>
+            <a href="mapa-suenos.html">Mapa de sueños</a>
+            <a href="blog-viajes.html">Blog</a>
+        </nav>
+        <div class="auth-actions">
+            <a class="auth-btn" href="index.html">Crear perfil</a>
+            <a class="auth-btn primary" href="index.html">Iniciar sesión</a>
         </div>
-        <div class="progress-wrap">
-            <div class="progress-label" id="progressLabel">Progreso: 0%</div>
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+    </header>
+
+    <section class="agenda-progress-panel">
+        <div class="progress-label" id="progressLabel">Progreso: 0%</div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-fill" id="progressFill"></div>
         </div>
-    </div>
+    </section>
 
     <main class="shell">
         <h1>Agenda para preparar tu viaje</h1>
@@ -422,37 +611,66 @@
             Marca lo que ya tengas listo. Tu progreso se guarda en este navegador (aunque cierres la pestaña).
         </p>
 
-        <section class="section" aria-labelledby="sec-docs">
-            <h2 id="sec-docs">Documentos e identidad</h2>
-            <ul class="list" data-section="docs">
-                <li><input type="checkbox" id="d1" data-id="d1"><label for="d1">Pasaporte o documento de identidad vigente</label></li>
-                <li><input type="checkbox" id="d2" data-id="d2"><label for="d2">Visa o permisos del destino (si aplica)</label></li>
-                <li><input type="checkbox" id="d3" data-id="d3"><label for="d3">Licencia de conducir internacional (si vas a manejar)</label></li>
-                <li><input type="checkbox" id="d4" data-id="d4"><label for="d4">Copias digitales / escaneos de documentos en la nube</label></li>
-                <li><input type="checkbox" id="d5" data-id="d5"><label for="d5">Seguro de viaje contratado y número de emergencia</label></li>
-            </ul>
+        <section class="agenda-dashboard-header">
+            <h2 class="agenda-dashboard-title">Prepara tu viaje paso a paso ✈️</h2>
+            <p class="agenda-dashboard-subtitle">Marca cada tarea y convierte tu viaje en una realidad organizada</p>
         </section>
 
-        <section class="section" aria-labelledby="sec-book">
-            <h2 id="sec-book">Reservas y transporte</h2>
-            <ul class="list" data-section="book">
-                <li><input type="checkbox" id="b1" data-id="b1"><label for="b1">Vuelos, tren o bus: billetes confirmados e itinerario</label></li>
-                <li><input type="checkbox" id="b2" data-id="b2"><label for="b2">Hotel o alojamiento con confirmación y dirección</label></li>
-                <li><input type="checkbox" id="b3" data-id="b3"><label for="b3">Traslado aeropuerto–hotel o alquiler de coche</label></li>
-                <li><input type="checkbox" id="b4" data-id="b4"><label for="b4">Check-in online del vuelo (cuando esté disponible)</label></li>
-                <li><input type="checkbox" id="b5" data-id="b5"><label for="b5">Asiento, equipaje de mano y facturado según aerolínea</label></li>
-            </ul>
-        </section>
+        <div class="checklist-grid" aria-label="Checklist de preparación">
+            <section class="section check-card" aria-labelledby="sec-docs">
+                <h2 id="sec-docs">Documentos e identidad</h2>
+                <ul class="list" data-section="docs">
+                    <li><input type="checkbox" id="d1" data-id="d1"><label for="d1">Pasaporte o documento de identidad vigente</label></li>
+                    <li><input type="checkbox" id="d2" data-id="d2"><label for="d2">Visa o permisos del destino (si aplica)</label></li>
+                    <li><input type="checkbox" id="d3" data-id="d3"><label for="d3">Licencia de conducir internacional (si vas a manejar)</label></li>
+                    <li><input type="checkbox" id="d4" data-id="d4"><label for="d4">Copias digitales / escaneos de documentos en la nube</label></li>
+                    <li><input type="checkbox" id="d5" data-id="d5"><label for="d5">Seguro de viaje contratado y número de emergencia</label></li>
+                </ul>
+            </section>
 
-        <section class="section" aria-labelledby="sec-money">
-            <h2 id="sec-money">Dinero y comunicación</h2>
-            <ul class="list" data-section="money">
-                <li><input type="checkbox" id="m1" data-id="m1"><label for="m1">Avisar al banco del uso de tarjetas en el extranjero</label></li>
-                <li><input type="checkbox" id="m2" data-id="m2"><label for="m2">Efectivo local o divisas / plan de retiros</label></li>
-                <li><input type="checkbox" id="m3" data-id="m3"><label for="m3">Roaming, eSIM o datos móviles en destino</label></li>
-                <li><input type="checkbox" id="m4" data-id="m4"><label for="m4">Apps útiles: mapas, traductor, moneda, transporte</label></li>
-            </ul>
-        </section>
+            <section class="section check-card" aria-labelledby="sec-book">
+                <h2 id="sec-book">Reservas y transporte</h2>
+                <ul class="list" data-section="book">
+                    <li><input type="checkbox" id="b1" data-id="b1"><label for="b1">Vuelos, tren o bus: billetes confirmados e itinerario</label></li>
+                    <li><input type="checkbox" id="b2" data-id="b2"><label for="b2">Hotel o alojamiento con confirmación y dirección</label></li>
+                    <li><input type="checkbox" id="b3" data-id="b3"><label for="b3">Traslado aeropuerto–hotel o alquiler de coche</label></li>
+                    <li><input type="checkbox" id="b4" data-id="b4"><label for="b4">Check-in online del vuelo (cuando esté disponible)</label></li>
+                    <li><input type="checkbox" id="b5" data-id="b5"><label for="b5">Asiento, equipaje de mano y facturado según aerolínea</label></li>
+                </ul>
+            </section>
+
+            <section class="section check-card" aria-labelledby="sec-stay">
+                <h2 id="sec-stay">Alojamiento</h2>
+                <ul class="list" data-section="stay">
+                    <li><input type="checkbox" id="h1" data-id="h1"><label for="h1">Vacunas o certificados requeridos en el destino</label></li>
+                    <li><input type="checkbox" id="h2" data-id="h2"><label for="h2">Medicamentos con receta y dosis suficientes</label></li>
+                    <li><input type="checkbox" id="h3" data-id="h3"><label for="h3">Botiquín básico (analgesia, digestivo, curitas…)</label></li>
+                    <li><input type="checkbox" id="h4" data-id="h4"><label for="h4">Protección solar e hidratación para el clima</label></li>
+                    <li><input type="checkbox" id="p1" data-id="p1"><label for="p1">Ropa acorde al clima y actividades planeadas</label></li>
+                    <li><input type="checkbox" id="p2" data-id="p2"><label for="p2">Calzado cómodo y, si hace falta, formal o de agua</label></li>
+                    <li><input type="checkbox" id="p3" data-id="p3"><label for="p3">Artículos de aseo en tamaño de viaje</label></li>
+                    <li><input type="checkbox" id="p4" data-id="p4"><label for="p4">Adaptadores de enchufe y cargadores</label></li>
+                    <li><input type="checkbox" id="p5" data-id="p5"><label for="p5">Bolsa de mano con lo esencial por si pierdes la maleta</label></li>
+                </ul>
+            </section>
+
+            <section class="section check-card" aria-labelledby="sec-final">
+                <h2 id="sec-final">Preparación final</h2>
+                <ul class="list" data-section="final">
+                    <li><input type="checkbox" id="m1" data-id="m1"><label for="m1">Avisar al banco del uso de tarjetas en el extranjero</label></li>
+                    <li><input type="checkbox" id="m2" data-id="m2"><label for="m2">Efectivo local o divisas / plan de retiros</label></li>
+                    <li><input type="checkbox" id="m3" data-id="m3"><label for="m3">Roaming, eSIM o datos móviles en destino</label></li>
+                    <li><input type="checkbox" id="m4" data-id="m4"><label for="m4">Apps útiles: mapas, traductor, moneda, transporte</label></li>
+                    <li><input type="checkbox" id="ho1" data-id="ho1"><label for="ho1">Regar plantas, comida de mascotas, llaves a alguien de confianza</label></li>
+                    <li><input type="checkbox" id="ho2" data-id="ho2"><label for="ho2">Desenchufar lo innecesario, cerrar gas/agua si aplica</label></li>
+                    <li><input type="checkbox" id="ho3" data-id="ho3"><label for="ho3">Basura fuera, nevera revisada, alarmas activadas</label></li>
+                    <li><input type="checkbox" id="ho4" data-id="ho4"><label for="ho4">Alarma de despertador y salida con margen al aeropuerto/estación</label></li>
+                    <li><input type="checkbox" id="e1" data-id="e1"><label for="e1">Entradas a museos, tours o eventos reservados</label></li>
+                    <li><input type="checkbox" id="e2" data-id="e2"><label for="e2">Lista de lugares y restaurantes que quieres visitar</label></li>
+                    <li><input type="checkbox" id="e3" data-id="e3"><label for="e3">Contacto de emergencia en el país y en casa</label></li>
+                </ul>
+            </section>
+        </div>
 
         <section class="section" aria-labelledby="sec-budget">
             <h2 id="sec-budget">Presupuesto del viaje</h2>
@@ -489,46 +707,6 @@
                     <div class="progress-fill" id="budgetProgressFill" style="width: 0%;"></div>
                 </div>
             </div>
-        </section>
-
-        <section class="section" aria-labelledby="sec-health">
-            <h2 id="sec-health">Salud y bienestar</h2>
-            <ul class="list" data-section="health">
-                <li><input type="checkbox" id="h1" data-id="h1"><label for="h1">Vacunas o certificados requeridos en el destino</label></li>
-                <li><input type="checkbox" id="h2" data-id="h2"><label for="h2">Medicamentos con receta y dosis suficientes</label></li>
-                <li><input type="checkbox" id="h3" data-id="h3"><label for="h3">Botiquín básico (analgesia, digestivo, curitas…)</label></li>
-                <li><input type="checkbox" id="h4" data-id="h4"><label for="h4">Protección solar e hidratación para el clima</label></li>
-            </ul>
-        </section>
-
-        <section class="section" aria-labelledby="sec-pack">
-            <h2 id="sec-pack">Maleta y ropa</h2>
-            <ul class="list" data-section="pack">
-                <li><input type="checkbox" id="p1" data-id="p1"><label for="p1">Ropa acorde al clima y actividades planeadas</label></li>
-                <li><input type="checkbox" id="p2" data-id="p2"><label for="p2">Calzado cómodo y, si hace falta, formal o de agua</label></li>
-                <li><input type="checkbox" id="p3" data-id="p3"><label for="p3">Artículos de aseo en tamaño de viaje</label></li>
-                <li><input type="checkbox" id="p4" data-id="p4"><label for="p4">Adaptadores de enchufe y cargadores</label></li>
-                <li><input type="checkbox" id="p5" data-id="p5"><label for="p5">Bolsa de mano con lo esencial por si pierdes la maleta</label></li>
-            </ul>
-        </section>
-
-        <section class="section" aria-labelledby="sec-home">
-            <h2 id="sec-home">Antes de salir de casa</h2>
-            <ul class="list" data-section="home">
-                <li><input type="checkbox" id="ho1" data-id="ho1"><label for="ho1">Regar plantas, comida de mascotas, llaves a alguien de confianza</label></li>
-                <li><input type="checkbox" id="ho2" data-id="ho2"><label for="ho2">Desenchufar lo innecesario, cerrar gas/agua si aplica</label></li>
-                <li><input type="checkbox" id="ho3" data-id="ho3"><label for="ho3">Basura fuera, nevera revisada, alarmas activadas</label></li>
-                <li><input type="checkbox" id="ho4" data-id="ho4"><label for="ho4">Alarma de despertador y salida con margen al aeropuerto/estación</label></li>
-            </ul>
-        </section>
-
-        <section class="section" aria-labelledby="sec-extra">
-            <h2 id="sec-extra">Extras</h2>
-            <ul class="list" data-section="extra">
-                <li><input type="checkbox" id="e1" data-id="e1"><label for="e1">Entradas a museos, tours o eventos reservados</label></li>
-                <li><input type="checkbox" id="e2" data-id="e2"><label for="e2">Lista de lugares y restaurantes que quieres visitar</label></li>
-                <li><input type="checkbox" id="e3" data-id="e3"><label for="e3">Contacto de emergencia en el país y en casa</label></li>
-            </ul>
         </section>
 
         <div class="tools">
