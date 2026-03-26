@@ -1128,23 +1128,502 @@
                 grid-template-columns: 1fr;
             }
         }
+        :root {
+            --app-white: #FFFFFF;
+            --app-surface: #FAFAFA;
+            --app-blue-soft: #D6EEFF;
+            --app-blue: #5BB8FF;
+            --app-yellow-soft: #FFEFA3;
+            --app-yellow-hover: #FFD447;
+            --app-pink-soft: #FFD6EC;
+            --app-text: #1F2937;
+            --app-text-muted: #6B7280;
+            --app-shadow: 0 16px 36px rgba(31, 41, 55, 0.12);
+        }
+        html[data-theme="dark"] {
+            --app-white: #0f172a;
+            --app-surface: #111827;
+            --app-blue-soft: #1e3a5f;
+            --app-blue: #60a5fa;
+            --app-yellow-soft: #5b4b1e;
+            --app-yellow-hover: #facc15;
+            --app-pink-soft: #55324e;
+            --app-text: #f8fafc;
+            --app-text-muted: #cbd5e1;
+            --app-shadow: 0 18px 42px rgba(2, 6, 23, 0.45);
+        }
+
+        body {
+            background: radial-gradient(circle at 8% 10%, rgba(91,184,255,.28), transparent 34%), radial-gradient(circle at 90% 16%, rgba(255,212,71,.28), transparent 34%), radial-gradient(circle at 52% 0%, rgba(255,214,236,.22), transparent 30%), var(--app-white) !important;
+            color: var(--app-text) !important;
+        }
+        html[data-theme="dark"] body {
+            background: radial-gradient(circle at 8% 10%, rgba(96,165,250,.22), transparent 34%), radial-gradient(circle at 90% 16%, rgba(250,204,21,.15), transparent 34%), radial-gradient(circle at 52% 0%, rgba(192,132,252,.12), transparent 30%), #0b1220 !important;
+        }
+        h1 {
+            background: linear-gradient(110deg, #1f2937 0%, #2b5ea8 45%, #7f4f9f 100%) !important;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h1, h2, h3, .section-title, .site-logo, .mini-title, .benefit-card h3, .explore-card h3 { color: var(--app-text) !important; background: none !important; -webkit-text-fill-color: currentColor; }
+        .subtitle, .section-lead, .progress-text, .mini-help, .benefit-card p, .explore-card p, .emotional-text, .about-list li { color: var(--app-text-muted) !important; }
+        .site-header { position: sticky; top: 0.75rem; z-index: 60; background: rgba(255,255,255,0.88) !important; border-color: #e5e7eb !important; backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(31,41,55,0.06) !important; }
+        html[data-theme="dark"] .site-header { background: rgba(15,23,42,0.86) !important; border-color: #334155 !important; }
+        .card, .landing-section, .mini-card, .benefit-card, .explore-card, .dream-preview-card, .modal { background: var(--app-white) !important; border-color: #dbeafe !important; box-shadow: var(--app-shadow) !important; border-radius: 18px !important; }
+        html[data-theme="dark"] .card, html[data-theme="dark"] .landing-section, html[data-theme="dark"] .mini-card, html[data-theme="dark"] .benefit-card, html[data-theme="dark"] .explore-card, html[data-theme="dark"] .dream-preview-card, html[data-theme="dark"] .modal { border-color: #334155 !important; }
+        .mini-card:hover, .benefit-card:hover, .explore-card:hover, .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 18px 42px rgba(126,200,255,.22) !important;
+        }
+        .emotional-section, .felicidad-section { background: linear-gradient(130deg, #eef8ff, #fffdf2) !important; }
+        .auth-btn, .site-nav a, .nav-agenda, .pill-link, .mini-btn, .felicidad-secondary-btn {
+            background: linear-gradient(135deg, var(--app-blue-soft), var(--app-yellow-soft)) !important;
+            color: var(--app-text) !important;
+            border-color: #dbeafe !important;
+            border-radius: 999px !important;
+            box-shadow: 0 8px 18px rgba(91,184,255,.24) !important;
+        }
+        .auth-btn.primary, .hero-main-cta, .modal-submit, .love-btn-xl {
+            background: linear-gradient(135deg, var(--app-blue), var(--app-yellow-soft), var(--app-pink-soft)) !important;
+            color: var(--app-text) !important;
+            border-color: transparent !important;
+            border-radius: 999px !important;
+            box-shadow: 0 8px 18px rgba(126,200,255,.24) !important;
+        }
+        .site-nav a.active { background: var(--app-yellow-soft) !important; color: var(--app-text) !important; font-weight: 700 !important; }
+        .site-nav a:hover, .auth-btn:hover, .nav-agenda:hover, .pill-link:hover, .mini-btn:hover, .hero-main-cta:hover, .love-btn-xl:hover {
+            background: linear-gradient(135deg, var(--app-blue), var(--app-yellow-hover)) !important;
+            box-shadow: 0 10px 22px rgba(31,41,55,0.14) !important;
+            transform: translateY(-2px) scale(1.02);
+        }
+        .mini-input, .mini-textarea, .modal-form input { background: color-mix(in srgb, var(--app-blue-soft) 36%, white) !important; border-color: #cfe5f6 !important; color: var(--app-text) !important; border-radius: 12px !important; }
+        html[data-theme="dark"] .mini-input, html[data-theme="dark"] .mini-textarea, html[data-theme="dark"] .modal-form input { border-color: #475569 !important; }
+        .mini-input:focus, .mini-textarea:focus, .modal-form input:focus { box-shadow: 0 0 0 3px rgba(167,216,255,0.35) !important; border-color: var(--app-blue) !important; }
+        .nav-toggle { display: none; border: 1px solid #dbeafe; border-radius: 10px; background: var(--app-surface); color: var(--app-text); width: 2.2rem; height: 2.2rem; cursor: pointer; }
+        .site-header + * { margin-top: 1rem !important; }
+        #themeToggleBtn {
+            position: relative;
+            width: 56px;
+            min-width: 56px;
+            height: 30px;
+            border-radius: 999px !important;
+            padding: 0 !important;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #dbeafe !important;
+            background: linear-gradient(135deg, var(--app-blue-soft), var(--app-yellow-soft)) !important;
+            margin-left: 0 !important;
+            overflow: hidden;
+            transform: none !important;
+        }
+        #themeToggleBtn .theme-knob {
+            width: 24px;
+            height: 24px;
+            margin-left: 4px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(31,41,55,.2);
+            transform: translateX(0);
+            transition: transform .42s cubic-bezier(.22, 1.45, .36, 1);
+            will-change: transform;
+            font-size: 13px;
+            line-height: 1;
+        }
+        html[data-theme="dark"] #themeToggleBtn .theme-knob {
+            transform: translateX(24px);
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        #themeToggleBtn:hover,
+        #themeToggleBtn:focus-visible {
+            transform: none !important;
+            box-shadow: 0 0 0 2px rgba(59,130,246,.25) !important;
+        }
+        .site-header, .card, .landing-section, .mini-card, .benefit-card, .explore-card, .mini-input, .mini-textarea, .auth-btn, .hero-main-cta { transition: background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .2s ease; }
+        @media (max-width: 900px) {
+            .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+            .site-nav, .header-right { display: none !important; width: 100%; }
+            .site-header.is-open .site-nav, .site-header.is-open .header-right { display: flex !important; }
+            .site-header.is-open .site-nav { flex-direction: column; align-items: flex-start; }
+            .site-header + * { margin-top: .75rem !important; }
+        }
+        :root {
+            --pro-white: #FFFFFF;
+            --pro-gray: #F8FAFC;
+            --pro-text: #0F172A;
+            --pro-muted: #64748B;
+            --pro-blue-soft: #60A5FA;
+            --pro-blue: #3B82F6;
+            --pro-yellow: #FFD60A;
+            --pro-grad: linear-gradient(135deg, #60A5FA, #FFD60A);
+        }
+        body {
+            background: linear-gradient(120deg, #F8FAFC, #E0F2FE, #FEF9C3) !important;
+            background-size: 200% 200%;
+            animation: bgShift 16s ease infinite;
+            color: var(--pro-text) !important;
+        }
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 24rem;
+            height: 24rem;
+            border-radius: 999px;
+            filter: blur(58px);
+            opacity: .2;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatBlob 18s ease-in-out infinite;
+        }
+        body::before { top: -8rem; left: -7rem; background: #60A5FA; }
+        body::after { bottom: -10rem; right: -8rem; background: #FFD60A; animation-delay: -7s; }
+        @keyframes bgShift { 0% { background-position: 0% 40%; } 50% { background-position: 100% 60%; } 100% { background-position: 0% 40%; } }
+        @keyframes floatBlob { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(18px,-14px,0); } }
+        .site-header { width: 100% !important; max-width: none !important; margin: 0 !important; border-radius: 0 !important; top: 0 !important; padding: .7rem 1rem !important; background: rgba(255,255,255,.8) !important; border-bottom: 1px solid rgba(15,23,42,.08) !important; box-shadow: 0 8px 24px rgba(15,23,42,.06) !important; }
+        .site-header-inner { width: min(1200px, 100%); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; position: relative; }
+        .site-logo { color: var(--pro-text) !important; font-weight: 800; }
+        .site-nav { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 1rem; }
+        .site-nav a { background: transparent !important; border: none !important; box-shadow: none !important; color: var(--pro-muted) !important; position: relative; padding: .2rem 0 !important; border-radius: 0 !important; }
+        .site-nav a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--pro-blue); transition: width .25s ease; }
+        .site-nav a:hover { color: var(--pro-blue) !important; transform: none !important; }
+        .site-nav a:hover::after, .site-nav a.active::after { width: 100%; }
+        .site-nav a.active { color: var(--pro-blue) !important; background: transparent !important; }
+        .auth-btn { border-radius: 12px !important; transition: all .25s ease !important; }
+        .auth-btn:not(.primary) { background: #fff !important; border: 1px solid #cbd5e1 !important; color: var(--pro-text) !important; box-shadow: none !important; }
+        .auth-btn.primary, .hero-main-cta, .modal-submit, .love-btn-xl { background: var(--pro-grad) !important; color: #0f172a !important; border: none !important; }
+        .auth-btn:hover, .hero-main-cta:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(59,130,246,.2) !important; }
+        .card, .landing-section, .mini-card, .benefit-card, .explore-card, .dream-preview-card, .modal { background: #fff !important; border-radius: 18px !important; border: 1px solid rgba(15,23,42,.08) !important; box-shadow: 0 10px 24px rgba(15,23,42,.08) !important; }
+        .mini-card:hover, .benefit-card:hover, .explore-card:hover, .card:hover { transform: translateY(-5px); box-shadow: 0 16px 30px rgba(15,23,42,.12) !important; }
+        .mini-input, .mini-textarea, .modal-form input { background: #eff6ff !important; border: 1px solid #bfdbfe !important; }
+        .mini-input:focus, .mini-textarea:focus, .modal-form input:focus { border-color: #3B82F6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,.18) !important; }
+        @media (max-width: 900px) {
+            .site-header-inner { flex-wrap: wrap; }
+            .site-nav { position: fixed; left: 0; right: 0; top: 64px; transform: none; flex-direction: column; align-items: center; justify-content: flex-start; gap: 1rem; padding: 1.5rem; min-height: calc(100dvh - 64px); background: rgba(248,250,252,.98); backdrop-filter: blur(10px); display: none; z-index: 80; }
+            .site-header.is-open .site-nav { display: flex !important; }
+            .site-header.is-open .header-right { display: flex !important; width: 100%; justify-content: center; }
+            .auth-btn { width: 100%; }
+        }
+        /* Final header/layout fix: prevent overlaps */
+        .site-header-inner {
+            display: grid !important;
+            grid-template-columns: auto auto 1fr auto;
+            align-items: center !important;
+            gap: .85rem !important;
+            flex-wrap: nowrap !important;
+        }
+        .site-logo { flex-shrink: 0; }
+        .site-nav {
+            position: static !important;
+            transform: none !important;
+            flex: 1 1 auto !important;
+            display: flex !important;
+            justify-content: center !important;
+            gap: .85rem !important;
+            min-width: 0;
+            white-space: nowrap;
+            flex-wrap: nowrap !important;
+        }
+        .header-right, .auth-actions {
+            display: flex !important;
+            align-items: center !important;
+            gap: .5rem !important;
+            margin-left: auto !important;
+            flex-shrink: 0;
+            flex-wrap: nowrap !important;
+        }
+        .auth-actions.is-hidden,
+        .user-badge.is-hidden,
+        .modal.is-hidden { display: none !important; }
+        .site-nav a { font-size: .95rem; }
+        .header-right .auth-btn { white-space: nowrap; }
+        #themeToggleBtn {
+            margin-left: .4rem !important;
+            flex-shrink: 0;
+            position: relative !important;
+            z-index: 2;
+        }
+        .auth-btn, .hero-main-cta, .submit-btn, .btn, .mini-btn {
+            border-radius: 12px !important;
+            padding: .55rem .95rem !important;
+        }
+        @media (max-width: 900px) {
+            .site-header-inner { flex-wrap: wrap !important; }
+            .site-header-inner { display: flex !important; }
+            .site-nav {
+                display: none !important;
+                position: fixed !important;
+                top: 64px !important;
+                left: 0 !important;
+                right: 0 !important;
+                min-height: calc(100dvh - 64px);
+                background: rgba(248,250,252,.98) !important;
+                padding: 1.2rem !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                z-index: 90 !important;
+            }
+            .site-header.is-open .site-nav { display: flex !important; }
+            .site-header.is-open .header-right, .site-header.is-open .auth-actions {
+                display: flex !important;
+                width: 100%;
+                justify-content: center !important;
+            }
+        }
+        /* Final nav pill hover fix */
+        .site-nav a {
+            border-radius: 999px !important;
+            padding: .45rem .8rem !important;
+            transition: background .22s ease, color .22s ease, box-shadow .22s ease, transform .22s ease !important;
+        }
+        .site-nav a::after { display: none !important; }
+        .site-nav a:hover,
+        .site-nav a.active {
+            background: rgba(59,130,246,.14) !important;
+            color: #0f172a !important;
+            box-shadow: 0 8px 18px rgba(59,130,246,.18) !important;
+            transform: translateY(-1px);
+        }
+        html[data-theme="dark"] .site-nav a { color: #cbd5e1 !important; }
+        html[data-theme="dark"] .site-nav a:hover,
+        html[data-theme="dark"] .site-nav a.active {
+            background: rgba(96,165,250,.24) !important;
+            color: #f8fafc !important;
+            box-shadow: 0 8px 18px rgba(96,165,250,.25) !important;
+        }
+        /* Final dark-mode contrast fix */
+        html[data-theme="dark"] body {
+            color: #e2e8f0 !important;
+            background: linear-gradient(120deg, #0b1220, #111827, #1f2937) !important;
+        }
+        html[data-theme="dark"] .site-header {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-color: #334155 !important;
+        }
+        html[data-theme="dark"] .site-logo,
+        html[data-theme="dark"] h1,
+        html[data-theme="dark"] h2,
+        html[data-theme="dark"] h3,
+        html[data-theme="dark"] .section-title,
+        html[data-theme="dark"] .mini-title {
+            color: #f8fafc !important;
+            background: none !important;
+            -webkit-text-fill-color: currentColor !important;
+        }
+        html[data-theme="dark"] .subtitle,
+        html[data-theme="dark"] .section-lead,
+        html[data-theme="dark"] .progress-text,
+        html[data-theme="dark"] .mini-help,
+        html[data-theme="dark"] .emotional-text {
+            color: #cbd5e1 !important;
+        }
+        html[data-theme="dark"] .card,
+        html[data-theme="dark"] .landing-section,
+        html[data-theme="dark"] .mini-card,
+        html[data-theme="dark"] .benefit-card,
+        html[data-theme="dark"] .explore-card,
+        html[data-theme="dark"] .dream-preview-card,
+        html[data-theme="dark"] .modal {
+            background: #111827 !important;
+            border-color: #334155 !important;
+            box-shadow: 0 10px 28px rgba(2, 6, 23, 0.45) !important;
+        }
+        html[data-theme="dark"] .site-nav a {
+            color: #cbd5e1 !important;
+        }
+        html[data-theme="dark"] .site-nav a:hover,
+        html[data-theme="dark"] .site-nav a.active {
+            color: #93c5fd !important;
+        }
+        html[data-theme="dark"] .mini-input,
+        html[data-theme="dark"] .mini-textarea,
+        html[data-theme="dark"] .modal-form input {
+            background: #0f172a !important;
+            border-color: #475569 !important;
+            color: #e2e8f0 !important;
+        }
+        /* Global header lock + visible theme switch */
+        .site-header { position: sticky !important; top: 0 !important; width: 100% !important; z-index: 120 !important; }
+        .site-header-inner {
+            width: min(1200px, 100%) !important;
+            margin: 0 auto !important;
+            display: grid !important;
+            grid-template-columns: auto auto 1fr auto !important;
+            align-items: center !important;
+            gap: .85rem !important;
+        }
+        .site-nav {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+            justify-content: center !important;
+            gap: .85rem !important;
+        }
+        .header-right, .auth-actions { margin-left: auto !important; display: flex !important; align-items: center !important; gap: .5rem !important; flex-wrap: nowrap !important; }
+        #themeToggleBtn { flex-shrink: 0 !important; }
+        html[data-theme="dark"] #themeToggleBtn {
+            border-color: #93c5fd !important;
+            background: linear-gradient(135deg, #1e3a8a, #0f172a) !important;
+        }
+        html[data-theme="dark"] #themeToggleBtn .theme-knob {
+            background: #0b1220 !important;
+            color: #f8fafc !important;
+            border: 1px solid #93c5fd !important;
+        }
+        @media (max-width: 900px) {
+            .site-header-inner { display: flex !important; flex-wrap: wrap !important; }
+            .site-nav { display: none !important; }
+            .site-header.is-open .site-nav {
+                display: flex !important;
+                position: fixed !important;
+                top: 64px !important;
+                left: 0 !important;
+                right: 0 !important;
+                min-height: calc(100dvh - 64px) !important;
+                padding: 1.2rem !important;
+                background: rgba(248,250,252,.98) !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                z-index: 120 !important;
+            }
+        }
+        /* Dark mode polish */
+        html[data-theme="dark"] .landing-shell,
+        html[data-theme="dark"] main.card {
+            background: #0b1220 !important;
+            border-color: #1e293b !important;
+        }
+        html[data-theme="dark"] .landing-section,
+        html[data-theme="dark"] .mini-card,
+        html[data-theme="dark"] .benefit-card,
+        html[data-theme="dark"] .explore-card,
+        html[data-theme="dark"] .dream-preview-card,
+        html[data-theme="dark"] .emotional-section,
+        html[data-theme="dark"] .felicidad-section {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+        }
+        html[data-theme="dark"] .benefit-card p,
+        html[data-theme="dark"] .explore-card p,
+        html[data-theme="dark"] .section-lead,
+        html[data-theme="dark"] .about-list li {
+            color: #cbd5e1 !important;
+        }
+        html[data-theme="dark"] .about-list li {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+        }
+        html[data-theme="dark"] .action-card {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+            box-shadow: 0 8px 22px rgba(2, 6, 23, 0.4) !important;
+        }
+        html[data-theme="dark"] .action-card h3 {
+            color: #f8fafc !important;
+        }
+        html[data-theme="dark"] .action-card p {
+            color: #cbd5e1 !important;
+        }
+        html[data-theme="dark"] #dreamPreviewGrid p {
+            color: #cbd5e1 !important;
+        }
+        html[data-theme="dark"] .mini-list li,
+        html[data-theme="dark"] .felicidad-stat-card {
+            background: #1e293b !important;
+            border-color: #475569 !important;
+            color: #e2e8f0 !important;
+        }
+        html[data-theme="dark"] .mini-list li label,
+        html[data-theme="dark"] .mini-list li span,
+        html[data-theme="dark"] .felicidad-history li {
+            color: #e2e8f0 !important;
+        }
+        html[data-theme="dark"] .happiness-counter,
+        html[data-theme="dark"] .felicidad-hint,
+        html[data-theme="dark"] .countdown-strong,
+        html[data-theme="dark"] .section-title {
+            color: #f8fafc !important;
+            -webkit-text-fill-color: currentColor !important;
+        }
+        html[data-theme="dark"] .felicidad-mini-progress {
+            background: rgba(148, 163, 184, 0.25) !important;
+        }
+        html[data-theme="dark"] .felicidad-mini-progress-fill {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #facc15) !important;
+        }
+        /* Final unified non-floating navbar */
+        .site-header {
+            position: sticky !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            padding: .7rem 1rem !important;
+            background: rgba(255,255,255,.84) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: none !important;
+            border-bottom: 1px solid rgba(15,23,42,.12) !important;
+            box-shadow: none !important;
+            z-index: 200 !important;
+        }
+        html[data-theme="dark"] .site-header {
+            background: rgba(15,23,42,.88) !important;
+            border-bottom-color: rgba(148,163,184,.26) !important;
+        }
+        .site-header-inner {
+            width: min(1200px, 100%) !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            align-items: center !important;
+        }
+        /* Final hard override: fixed bar, not floating card */
+        .site-header {
+            top: 0 !important;
+            background: #ffffff !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+        html[data-theme="dark"] .site-header {
+            background: #0f172a !important;
+            border-bottom-color: rgba(148, 163, 184, 0.3) !important;
+        }
+        /* Final text color cleanup: remove residual purple text */
+        body,
+        h1, h2, h3, h4, h5, h6,
+        p, li, label, small, span,
+        .intro, .muted, .note, .empty-state {
+            color: #0f172a !important;
+        }
+        html[data-theme="dark"] body,
+        html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3,
+        html[data-theme="dark"] h4, html[data-theme="dark"] h5, html[data-theme="dark"] h6,
+        html[data-theme="dark"] p, html[data-theme="dark"] li, html[data-theme="dark"] label,
+        html[data-theme="dark"] small, html[data-theme="dark"] span,
+        html[data-theme="dark"] .intro, html[data-theme="dark"] .muted,
+        html[data-theme="dark"] .note, html[data-theme="dark"] .empty-state {
+            color: #e2e8f0 !important;
+        }
     </style>
 </head>
 <body>
-    <div class="hearts-bg" aria-hidden="true">
-        <span class="heart" style="left: 8%; top: 12%; animation-delay: 0s;">💜</span>
-        <span class="heart" style="left: 18%; top: 65%; animation-delay: 1.2s;">💜</span>
-        <span class="heart" style="left: 85%; top: 20%; animation-delay: 0.5s;">💜</span>
-        <span class="heart" style="left: 72%; top: 70%; animation-delay: 2s;">💜</span>
-        <span class="heart" style="left: 45%; top: 8%; animation-delay: 1.5s;">💜</span>
-        <span class="heart" style="left: 5%; top: 40%; animation-delay: 0.8s;">💜</span>
-        <span class="heart" style="left: 92%; top: 45%; animation-delay: 2.5s;">💜</span>
-        <span class="heart" style="left: 30%; top: 85%; animation-delay: 1s;">💜</span>
-        <span class="heart" style="left: 55%; top: 88%; animation-delay: 0.3s;">💜</span>
-    </div>
-
     <header class="site-header">
+        <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
+        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menu">☰</button>
+        <button type="button" class="auth-btn" id="themeToggleBtn" aria-label="Cambiar tema" aria-pressed="false" title="Cambiar tema">
+            <span class="theme-knob" aria-hidden="true">☀</span>
+        </button>
         <nav class="site-nav" aria-label="Menu principal">
             <a href="index.html">Inicio</a>
             <a href="agenda-viaje.html">Agenda</a>
@@ -1168,6 +1647,7 @@
                 <button type="button" class="auth-btn" id="btnEditProfile">Editar perfil</button>
                 <button type="button" class="auth-btn" id="btnLogout">Salir</button>
             </div>
+        </div>
         </div>
     </header>
 
@@ -1368,6 +1848,27 @@
     </div>
 
     <script>
+        const navToggleBtn = document.getElementById("navToggleBtn");
+        const siteHeader = document.querySelector(".site-header");
+        const themeToggleBtn = document.getElementById("themeToggleBtn");
+        const THEME_KEY = "devtata-theme";
+        navToggleBtn?.addEventListener("click", () => siteHeader?.classList.toggle("is-open"));
+        function applyTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            if (!themeToggleBtn) return;
+            const knob = themeToggleBtn.querySelector(".theme-knob");
+            themeToggleBtn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+            themeToggleBtn.title = theme === "dark" ? "Activar modo claro" : "Activar modo oscuro";
+            if (knob) knob.textContent = theme === "dark" ? "☾" : "☀";
+        }
+        const savedTheme = localStorage.getItem(THEME_KEY) || "light";
+        applyTheme(savedTheme);
+        themeToggleBtn?.addEventListener("click", () => {
+            const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            localStorage.setItem(THEME_KEY, next);
+            applyTheme(next);
+        });
+
         const HAPPINESS_KEY = "devtata-felicidad-count";
         const HAPPINESS_META_KEY = "devtata-felicidad-meta";
         const DAILY_HAPPINESS_GOAL = 3;
@@ -1868,7 +2369,8 @@
             if (top.length === 0) {
                 const empty = document.createElement("p");
                 empty.textContent = "Aún no tienes destinos en tu mapa de sueños.";
-                empty.style.color = "#86198f";
+                const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+                empty.style.color = isDark ? "#cbd5e1" : "#86198f";
                 empty.style.fontWeight = "700";
                 empty.style.opacity = "0.9";
                 dreamPreviewGrid.append(empty);
