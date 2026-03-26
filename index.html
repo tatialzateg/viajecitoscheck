@@ -820,6 +820,43 @@
             line-height: 1.45;
         }
 
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .explore-card {
+            display: block;
+            text-decoration: none;
+            border-radius: 18px;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.08);
+            padding: 1rem 1rem 1.1rem;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .explore-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 28px rgba(124, 58, 237, 0.14);
+        }
+
+        .explore-card h3 {
+            font-size: 1.02rem;
+            font-weight: 900;
+            color: #5b21b6;
+            margin-bottom: 0.35rem;
+        }
+
+        .explore-card p {
+            color: #4c1d95;
+            opacity: 0.92;
+            font-weight: 600;
+            line-height: 1.45;
+            font-size: 0.92rem;
+        }
+
         .about-wrap {
             display: grid;
             gap: 1rem;
@@ -1038,6 +1075,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .explore-grid {
+                grid-template-columns: 1fr;
+            }
+
             .actions-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -1109,6 +1150,9 @@
             <a href="agenda-viaje.html">Agenda</a>
             <a href="mapa-suenos.html">Mapa de sueños</a>
             <a href="blog-viajes.html">Blog</a>
+            <a href="inspiracion-viajera.html">Inspiración</a>
+            <a href="frases-inspiracionales.html">Frases</a>
+            <a href="descubre-tu-viaje.html">Quiz</a>
         </nav>
         <div class="header-right">
             <div class="user-badge" id="userBadge" aria-live="polite">
@@ -1230,6 +1274,24 @@
                     <a class="pill-link" href="mapa-suenos.html">Ver mapa de sueños</a>
                 </div>
                 <div class="dream-preview-grid" id="dreamPreviewGrid" aria-live="polite"></div>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">Explora más</h2>
+                <div class="explore-grid">
+                    <a class="explore-card" href="inspiracion-viajera.html">
+                        <h3>Inspiración viajera</h3>
+                        <p>Descubre ideas y artículos para imaginar tu próxima aventura con intención.</p>
+                    </a>
+                    <a class="explore-card" href="frases-inspiracionales.html">
+                        <h3>Frases inspiracionales</h3>
+                        <p>Recibe una frase nueva y guarda tus favoritas para mantener alta tu motivación.</p>
+                    </a>
+                    <a class="explore-card" href="descubre-tu-viaje.html">
+                        <h3>Descubre tu próximo viaje</h3>
+                        <p>Haz un mini quiz emocional y obtén un destino sugerido según tu energía actual.</p>
+                    </a>
+                </div>
             </section>
 
             <section class="landing-section">

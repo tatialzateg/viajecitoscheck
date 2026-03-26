@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiración viajera — ViajecitosCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --lilac-deep:#7c3aed; --lilac-soft:#ddd6fe; --pink-deep:#db2777; --pink-soft:#fbcfe8; --cream:#fdf4ff; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { min-height:100vh; font-family:"Quicksand",system-ui,sans-serif; background:linear-gradient(145deg,var(--cream) 0%,var(--lilac-soft) 35%,var(--pink-soft) 100%); color:#4c1d95; padding:clamp(1rem,4vw,2rem); }
+        .site-header { width:min(980px,100%); margin:0 auto 1rem; padding:.7rem .85rem; border-radius:20px; border:1px solid rgba(167,139,250,.35); background:rgba(255,255,255,.72); backdrop-filter:blur(8px); box-shadow:0 8px 26px rgba(124,58,237,.11); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem; }
+        .site-logo { font-size:1.12rem; font-weight:800; color:var(--lilac-deep); }
+        .site-nav,.auth-actions { display:flex; flex-wrap:wrap; gap:.35rem; align-items:center; }
+        .site-nav a,.auth-btn { text-decoration:none; color:#5b21b6; font-weight:700; font-size:.9rem; padding:.42rem .78rem; border-radius:999px; border:1px solid rgba(167,139,250,.55); background:rgba(255,255,255,.82); transition:transform .15s ease,box-shadow .2s ease; }
+        .site-nav a:hover,.auth-btn:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(124,58,237,.12); }
+        .site-nav a.active { color:#a855f7; font-weight:700; background:rgba(255,255,255,.92); }
+        .auth-btn.primary { border-color:transparent; background:linear-gradient(120deg,#7c3aed,#db2777); color:#fff; }
+        .shell { width:min(980px,100%); margin:0 auto; border-radius:24px; border:1px solid rgba(167,139,250,.35); background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(252,231,243,.88)); box-shadow:0 4px 28px rgba(124,58,237,.12); padding:clamp(1.1rem,3vw,1.7rem); }
+        h1 { font-size:clamp(1.55rem,5vw,2.1rem); background:linear-gradient(120deg,var(--lilac-deep),var(--pink-deep)); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:.35rem; }
+        .intro { color:#86198f; opacity:.92; margin-bottom:1rem; }
+        .article-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+        .article-card { border-radius:18px; overflow:hidden; border:1px solid rgba(167,139,250,.35); background:rgba(255,255,255,.76); box-shadow:0 4px 18px rgba(124,58,237,.08); transition:transform .22s ease, box-shadow .22s ease; }
+        .article-card:hover { transform:scale(1.02); box-shadow:0 12px 28px rgba(124,58,237,.14); }
+        .article-card img { width:100%; height:180px; object-fit:cover; display:block; }
+        .article-body { padding:.85rem .95rem 1rem; }
+        .article-title { font-size:1.02rem; font-weight:800; color:#5b21b6; margin-bottom:.35rem; }
+        .article-desc { font-size:.9rem; line-height:1.45; color:#4c1d95; }
+        @media (max-width:900px) { .site-header{flex-direction:column; align-items:flex-start;} .site-nav,.auth-actions{width:100%;} .article-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+        @media (max-width:620px) { .article-grid{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a>
+            <a href="agenda-viaje.html">Agenda</a>
+            <a href="mapa-suenos.html">Mapa de sueños</a>
+            <a href="blog-viajes.html">Blog</a>
+            <a class="active" href="inspiracion-viajera.html">Inspiración</a>
+        </nav>
+        <div class="auth-actions">
+            <a class="auth-btn" href="index.html">Crear perfil</a>
+            <a class="auth-btn primary" href="index.html">Iniciar sesión</a>
+        </div>
+    </header>
+    <main class="shell">
+        <h1>Inspiración viajera</h1>
+        <p class="intro">Ideas, rutas y experiencias para alimentar tu próxima aventura.</p>
+        <section class="article-grid" aria-label="Artículos inspiracionales">
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Ciudades que enamoran al caminar</h2><p class="article-desc">Rincones con callecitas, cafés y plazas para perderte sin prisa y reconectar.</p></div></article>
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Escapadas de naturaleza para respirar</h2><p class="article-desc">Destinos verdes para bajar el ritmo, descansar la mente y volver con energía.</p></div></article>
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Rutas culturales con historia viva</h2><p class="article-desc">Museos, barrios y tradiciones locales para viajar con mirada curiosa.</p></div></article>
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Playas para resetear tu semana</h2><p class="article-desc">Ideas para viajes cortos junto al mar con presupuesto y tiempos realistas.</p></div></article>
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Roadtrips memorables en pareja</h2><p class="article-desc">Qué llevar, cómo planear paradas y cómo convertir la ruta en parte del viaje.</p></div></article>
+            <article class="article-card"><img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80" alt=""><div class="article-body"><h2 class="article-title">Viajes sociales para hacer amigos</h2><p class="article-desc">Hostales, tours y actividades para conocer personas y sumar historias.</p></div></article>
+        </section>
+    </main>
+</body>
+</html>

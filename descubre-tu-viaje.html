@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubre tu próximo viaje — ViajecitosCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --lilac-deep:#7c3aed; --lilac-soft:#ddd6fe; --pink-deep:#db2777; --pink-soft:#fbcfe8; --cream:#fdf4ff; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;font-family:"Quicksand",system-ui,sans-serif;background:linear-gradient(145deg,var(--cream),var(--lilac-soft),var(--pink-soft));color:#4c1d95;padding:clamp(1rem,4vw,2rem)}
+        .site-header{width:min(980px,100%);margin:0 auto 1rem;padding:.7rem .85rem;border-radius:20px;border:1px solid rgba(167,139,250,.35);background:rgba(255,255,255,.72);backdrop-filter:blur(8px);box-shadow:0 8px 26px rgba(124,58,237,.11);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem}
+        .site-logo{font-size:1.12rem;font-weight:800;color:var(--lilac-deep)}
+        .site-nav,.auth-actions{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+        .site-nav a,.auth-btn{text-decoration:none;color:#5b21b6;font-weight:700;font-size:.9rem;padding:.42rem .78rem;border-radius:999px;border:1px solid rgba(167,139,250,.55);background:rgba(255,255,255,.82);transition:transform .15s ease}
+        .site-nav a:hover,.auth-btn:hover{transform:scale(1.05)}
+        .site-nav a.active{color:#a855f7;background:rgba(255,255,255,.92)}
+        .auth-btn.primary{border-color:transparent;background:linear-gradient(120deg,#7c3aed,#db2777);color:#fff}
+        .shell{width:min(980px,100%);margin:0 auto;border-radius:24px;border:1px solid rgba(167,139,250,.35);background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(252,231,243,.88));box-shadow:0 4px 28px rgba(124,58,237,.12);padding:clamp(1.1rem,3vw,1.7rem)}
+        h1{font-size:clamp(1.55rem,5vw,2.1rem);background:linear-gradient(120deg,var(--lilac-deep),var(--pink-deep));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.35rem}
+        .intro{color:#86198f;opacity:.92;margin-bottom:1rem}
+        .quiz-card,.result-card{border:1px solid rgba(167,139,250,.35);border-radius:18px;background:rgba(255,255,255,.78);box-shadow:0 6px 20px rgba(124,58,237,.09);padding:1rem}
+        .question{font-weight:800;color:#5b21b6;margin-bottom:.65rem}
+        .options{display:grid;gap:.5rem}
+        .options button{border:1px solid rgba(167,139,250,.5);border-radius:12px;background:rgba(255,255,255,.9);padding:.6rem .7rem;color:#6d28d9;font-family:inherit;font-weight:700;cursor:pointer;transition:transform .15s ease}
+        .options button:hover{transform:scale(1.01)}
+        .progress{margin-top:.7rem;font-size:.86rem;color:#7e22ce}
+        .result-card{margin-top:1rem;display:none}
+        .result-card.show{display:block}
+        .result-title{font-size:1.2rem;font-weight:900;color:#5b21b6;margin-bottom:.35rem}
+        .btn-row{margin-top:.75rem;display:flex;gap:.45rem;flex-wrap:wrap}
+        .btn{border:1px solid rgba(167,139,250,.5);border-radius:999px;background:rgba(255,255,255,.85);padding:.45rem .85rem;color:#6d28d9;text-decoration:none;font-weight:800;font-size:.85rem}
+        @media (max-width:860px){.site-header{flex-direction:column;align-items:flex-start}.site-nav,.auth-actions{width:100%}}
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-logo">ViajecitosCheck</div>
+        <nav class="site-nav" aria-label="Menu principal">
+            <a href="index.html">Inicio</a><a href="agenda-viaje.html">Agenda</a><a href="mapa-suenos.html">Mapa de sueños</a><a href="blog-viajes.html">Blog</a><a href="inspiracion-viajera.html">Inspiración</a><a href="frases-inspiracionales.html">Frases</a><a class="active" href="descubre-tu-viaje.html">Quiz</a>
+        </nav>
+        <div class="auth-actions"><a class="auth-btn" href="index.html">Crear perfil</a><a class="auth-btn primary" href="index.html">Iniciar sesión</a></div>
+    </header>
+    <main class="shell">
+        <h1>Descubre tu próximo viaje</h1>
+        <p class="intro">Responde este mini quiz y recibe un destino sugerido según tu estilo.</p>
+        <section class="quiz-card">
+            <div class="question" id="qText"></div>
+            <div class="options" id="qOptions"></div>
+            <p class="progress" id="qProgress"></p>
+        </section>
+        <section class="result-card" id="resultCard">
+            <h2 class="result-title" id="resultTitle"></h2>
+            <p id="resultDesc"></p>
+            <div class="btn-row">
+                <a class="btn" href="mapa-suenos.html">Guardar en mapa</a>
+                <a class="btn" href="blog-viajes.html">Inspirarme en historias</a>
+                <button class="btn" id="restartBtn" type="button">Reiniciar quiz</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        const HISTORY_KEY = "devtata-quiz-history";
+        const QUESTIONS = [
+            { q: "Que plan te atrae mas?", options:[["Playa y descanso","relax"],["Montanas y caminatas","aventura"],["Ciudad y cultura","social"]] },
+            { q: "Tu ritmo ideal de viaje es...", options:[["Sin afan","relax"],["Activa todo el dia","aventura"],["Flexible con planes compartidos","social"]] },
+            { q: "Prefieres alojarte en...", options:[["Cabanas tranquilas","relax"],["Lugares cerca de naturaleza","aventura"],["Zonas centricas con ambiente","social"]] }
+        ];
+        const RESULTS = {
+            relax: { title:"Tu proximo destino: Tulum, Mexico", desc:"Necesitas calma, mar y espacios para reconectar contigo." },
+            aventura: { title:"Tu proximo destino: Cusco, Peru", desc:"Tu energia pide rutas, altura y experiencias intensas." },
+            social: { title:"Tu proximo destino: Medellin, Colombia", desc:"Tu estilo va con cultura local, buena conversacion y vida urbana." }
+        };
+        const qText = document.getElementById("qText");
+        const qOptions = document.getElementById("qOptions");
+        const qProgress = document.getElementById("qProgress");
+        const resultCard = document.getElementById("resultCard");
+        const resultTitle = document.getElementById("resultTitle");
+        const resultDesc = document.getElementById("resultDesc");
+        let idx = 0;
+        const score = { relax:0, aventura:0, social:0 };
+
+        function renderQ() {
+            const item = QUESTIONS[idx];
+            qText.textContent = item.q;
+            qProgress.textContent = "Pregunta " + (idx + 1) + " de " + QUESTIONS.length;
+            qOptions.innerHTML = "";
+            item.options.forEach(([label, key]) => {
+                const b = document.createElement("button");
+                b.type = "button";
+                b.textContent = label;
+                b.addEventListener("click", () => {
+                    score[key] += 1;
+                    idx += 1;
+                    if (idx >= QUESTIONS.length) showResult(); else renderQ();
+                });
+                qOptions.append(b);
+            });
+        }
+        function showResult() {
+            const winner = Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];
+            const r = RESULTS[winner];
+            resultTitle.textContent = r.title;
+            resultDesc.textContent = r.desc;
+            resultCard.classList.add("show");
+            qOptions.innerHTML = "";
+            qText.textContent = "Resultado listo";
+            qProgress.textContent = "Quiz completado";
+            localStorage.setItem(HISTORY_KEY, JSON.stringify({ winner, at: new Date().toISOString() }));
+        }
+        document.getElementById("restartBtn").addEventListener("click", () => {
+            idx = 0;
+            score.relax = score.aventura = score.social = 0;
+            resultCard.classList.remove("show");
+            renderQ();
+        });
+        renderQ();
+    </script>
+</body>
+</html>
