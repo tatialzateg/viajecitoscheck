@@ -6,7 +6,7 @@
     <title>ViajecitosCheck</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --lilac-deep: #7c3aed;
@@ -1695,9 +1695,46 @@
                 grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
             }
         }
+        /* Mobile header fit fix */
+        @media (max-width: 767px) {
+            .site-header { padding: 0.55rem 0.65rem !important; }
+            .site-header-inner {
+                grid-template-columns: 1fr auto auto !important;
+                grid-template-areas:
+                    "logo toggle theme"
+                    "actions actions actions"
+                    "nav nav nav" !important;
+                gap: 0.5rem !important;
+            }
+            .site-logo { grid-area: logo; font-size: 1.05rem !important; }
+            .nav-toggle { grid-area: toggle; width: 2.35rem; height: 2.35rem; }
+            #themeToggleBtn { grid-area: theme; justify-self: end; }
+            .header-right {
+                grid-area: actions;
+                width: 100%;
+                justify-content: stretch !important;
+            }
+            .auth-actions {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                width: 100% !important;
+                gap: 0.5rem !important;
+            }
+            .auth-btn {
+                min-width: 0 !important;
+                width: 100% !important;
+                padding: 0.56rem 0.5rem !important;
+                font-size: 0.82rem !important;
+                white-space: nowrap;
+            }
+            .site-nav { grid-area: nav; top: 112px !important; }
+        }
     </style>
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
 </head>
-<body>
+<body class="page-home">
     <header class="site-header">
         <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
@@ -1745,6 +1782,9 @@
                     <a class="nav-agenda" href="blog-viajes.html">📷 Blog viajero</a>
                     <a class="nav-agenda" href="mapa-suenos.html">🌟 Mapa de sueños</a>
                 </nav>
+                <div class="hero-media">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" alt="Pareja disfrutando un viaje frente al mar">
+                </div>
             </section>
 
             <section class="landing-section">
@@ -1870,6 +1910,24 @@
                         <h3>💛 Cumple → celebra tu logro</h3>
                         <p>Cuando un sueño se cumple, celebras con intención.</p>
                     </div>
+                </div>
+            </section>
+
+            <section class="landing-section">
+                <h2 class="section-title">Testimonios</h2>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <p>"Pasé de tener ideas sueltas a un plan claro en menos de una semana."</p>
+                        <div class="testimonial-author">Mariana, Medellín</div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"El mapa de sueños me ayudó a priorizar destinos y a ahorrar con enfoque."</p>
+                        <div class="testimonial-author">Carlos, Bogotá</div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"Se siente como usar una app premium: ordenada, motivadora y muy visual."</p>
+                        <div class="testimonial-author">Daniela, Cali</div>
+                    </article>
                 </div>
             </section>
 
