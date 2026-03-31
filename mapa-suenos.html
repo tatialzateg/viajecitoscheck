@@ -916,16 +916,16 @@
     <header class="site-header">
         <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
-        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menu">☰</button>
+        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menú">☰</button>
         <button type="button" class="auth-btn" id="themeToggleBtn" aria-label="Cambiar tema" aria-pressed="false" title="Cambiar tema"><span class="theme-knob" aria-hidden="true">☀</span></button>
-        <nav class="site-nav" aria-label="Menu principal">
+        <nav class="site-nav" aria-label="Menú principal">
             <a href="index.html">Inicio</a>
             <a href="agenda-viaje.html">Agenda</a>
             <a class="active" href="mapa-suenos.html">Mapa de sueños</a>
             <a href="blog-viajes.html">Blog</a>
             <a href="inspiracion-viajera.html">Inspiración</a>
             <a href="frases-inspiracionales.html">Frases</a>
-            <a href="descubre-tu-viaje.html">Quiz</a>
+            <a href="descubre-tu-viaje.html">Descubrir</a>
         </nav>
         <div class="header-right">
             <div class="auth-actions" id="guestAuthActions">
@@ -943,7 +943,7 @@
     <main class="shell">
         <h1>Mapa de sueños 🌍</h1>
         <p class="intro">
-            Visualiza, organiza y convierte tus destinos soñados en viajes reales
+            Visualiza, ordena y acerca tus destinos soñados a viajes reales.
         </p>
 
         <div class="flash" id="flash" role="status" aria-live="polite"></div>
@@ -973,7 +973,7 @@
                             </select>
                         </div>
                         <div class="field">
-                            <label for="dreamMood">Mood del viaje</label>
+                            <label for="dreamMood">Ambiente del viaje</label>
                             <select id="dreamMood">
                                 <option value="relax" selected>Relax</option>
                                 <option value="aventura">Aventura</option>
@@ -1076,8 +1076,8 @@
 
         const MOOD_MESSAGES = {
             relax: "Tu viaje pide calma: respira, baja el ritmo y disfruta sin prisa.",
-            aventura: "Tu energía está alta: este destino te invita a moverte y descubrir.",
-            social: "Tu mood es conexión: vive lugares que se disfrutan mejor en compañía.",
+            aventura: "Tu energía está alta: este destino te invita a moverte y a descubrir.",
+            social: "Buscas conexión: elige lugares que se disfrutan mejor en compañía.",
             desconexion: "Tu mente pide pausa: este destino te ayuda a reconectar contigo.",
         };
 
@@ -1253,7 +1253,7 @@
 
                 const moodPill = document.createElement("span");
                 moodPill.className = "pill status";
-                moodPill.textContent = "Mood: " + MOOD_LABELS[normalizeMood(dream.mood)];
+                moodPill.textContent = "Ambiente: " + MOOD_LABELS[normalizeMood(dream.mood)];
 
                 meta.append(priorityPill, statusPill, moodPill);
 

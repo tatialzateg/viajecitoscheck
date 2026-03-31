@@ -357,17 +357,17 @@
     <header class="site-header">
         <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
-        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menu">☰</button>
+        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menú">☰</button>
         <button type="button" class="auth-btn" id="themeToggleBtn" aria-label="Cambiar tema" aria-pressed="false" title="Cambiar tema"><span class="theme-knob" aria-hidden="true">☀</span></button>
-        <nav class="site-nav" aria-label="Menu principal">
-            <a href="index.html">Inicio</a><a href="agenda-viaje.html">Agenda</a><a href="mapa-suenos.html">Mapa de sueños</a><a href="blog-viajes.html">Blog</a><a href="inspiracion-viajera.html">Inspiración</a><a href="frases-inspiracionales.html">Frases</a><a class="active" href="descubre-tu-viaje.html">Quiz</a>
+        <nav class="site-nav" aria-label="Menú principal">
+            <a href="index.html">Inicio</a><a href="agenda-viaje.html">Agenda</a><a href="mapa-suenos.html">Mapa de sueños</a><a href="blog-viajes.html">Blog</a><a href="inspiracion-viajera.html">Inspiración</a><a href="frases-inspiracionales.html">Frases</a><a class="active" href="descubre-tu-viaje.html">Descubrir</a>
         </nav>
         <div class="header-right"><div class="auth-actions" id="guestAuthActions"><a class="auth-btn" href="index.html">Crear perfil</a><a class="auth-btn primary" href="index.html">Iniciar sesión</a></div><div class="auth-actions is-hidden" id="userAuthActions"><a class="auth-btn" href="index.html">Editar perfil</a><a class="auth-btn" href="index.html">Salir</a></div></div>
         </div>
     </header>
     <main class="shell">
         <h1>Descubre tu próximo viaje</h1>
-        <p class="intro">Responde este mini quiz y recibe un destino sugerido según tu estilo.</p>
+        <p class="intro">Responde unas preguntas cortas y recibe una idea de destino según tu estilo de viaje.</p>
         <section class="quiz-card">
             <div class="question" id="qText"></div>
             <div class="options" id="qOptions"></div>
@@ -377,9 +377,9 @@
             <h2 class="result-title" id="resultTitle"></h2>
             <p id="resultDesc"></p>
             <div class="btn-row">
-                <a class="btn" href="mapa-suenos.html">Guardar en mapa</a>
-                <a class="btn" href="blog-viajes.html">Inspirarme en historias</a>
-                <button class="btn" id="restartBtn" type="button">Reiniciar quiz</button>
+                <a class="btn" href="mapa-suenos.html">Añadir al mapa de sueños</a>
+                <a class="btn" href="blog-viajes.html">Ver historias en el blog</a>
+                <button class="btn" id="restartBtn" type="button">Reiniciar cuestionario</button>
             </div>
         </section>
     </main>
@@ -406,14 +406,14 @@
 
         const HISTORY_KEY = "devtata-quiz-history";
         const QUESTIONS = [
-            { q: "Que plan te atrae mas?", options:[["Playa y descanso","relax"],["Montanas y caminatas","aventura"],["Ciudad y cultura","social"]] },
-            { q: "Tu ritmo ideal de viaje es...", options:[["Sin afan","relax"],["Activa todo el dia","aventura"],["Flexible con planes compartidos","social"]] },
-            { q: "Prefieres alojarte en...", options:[["Cabanas tranquilas","relax"],["Lugares cerca de naturaleza","aventura"],["Zonas centricas con ambiente","social"]] }
+            { q: "¿Qué tipo de plan te atrae más?", options:[["Playa y descanso","relax"],["Montañas y caminatas","aventura"],["Ciudad y cultura","social"]] },
+            { q: "Tu ritmo ideal de viaje es…", options:[["Sin afán","relax"],["Activo todo el día","aventura"],["Flexible, con planes compartidos","social"]] },
+            { q: "¿Dónde te gustaría alojarte?", options:[["Cabañas tranquilas","relax"],["Lugares cerca de la naturaleza","aventura"],["Zonas céntricas con ambiente","social"]] }
         ];
         const RESULTS = {
-            relax: { title:"Tu proximo destino: Tulum, Mexico", desc:"Necesitas calma, mar y espacios para reconectar contigo." },
-            aventura: { title:"Tu proximo destino: Cusco, Peru", desc:"Tu energia pide rutas, altura y experiencias intensas." },
-            social: { title:"Tu proximo destino: Medellin, Colombia", desc:"Tu estilo va con cultura local, buena conversacion y vida urbana." }
+            relax: { title: "Tu próximo destino podría ser: Tulum, México", desc: "Buscas calma, mar y espacios para reconectar contigo." },
+            aventura: { title: "Tu próximo destino podría ser: Cusco, Perú", desc: "Tu energía pide rutas, altura y experiencias intensas." },
+            social: { title: "Tu próximo destino podría ser: Medellín, Colombia", desc: "Te va la cultura local, la buena conversación y la vida urbana." }
         };
         const qText = document.getElementById("qText");
         const qOptions = document.getElementById("qOptions");
@@ -448,8 +448,8 @@
             resultDesc.textContent = r.desc;
             resultCard.classList.add("show");
             qOptions.innerHTML = "";
-            qText.textContent = "Resultado listo";
-            qProgress.textContent = "Quiz completado";
+            qText.textContent = "¡Listo!";
+            qProgress.textContent = "Cuestionario completado";
             localStorage.setItem(HISTORY_KEY, JSON.stringify({ winner, at: new Date().toISOString() }));
         }
         document.getElementById("restartBtn").addEventListener("click", () => {

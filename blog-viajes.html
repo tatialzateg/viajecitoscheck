@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog viajero — Devtata</title>
+    <title>Blog viajero — ViajecitosCheck</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -769,16 +769,16 @@
     <header class="site-header">
         <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
-        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menu">☰</button>
+        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menú">☰</button>
         <button type="button" class="auth-btn" id="themeToggleBtn" aria-label="Cambiar tema" aria-pressed="false" title="Cambiar tema"><span class="theme-knob" aria-hidden="true">☀</span></button>
-        <nav class="site-nav" aria-label="Menu principal">
+        <nav class="site-nav" aria-label="Menú principal">
             <a href="index.html">Inicio</a>
             <a href="agenda-viaje.html">Agenda</a>
             <a href="mapa-suenos.html">Mapa de sueños</a>
             <a class="active" href="blog-viajes.html">Blog</a>
             <a href="inspiracion-viajera.html">Inspiración</a>
             <a href="frases-inspiracionales.html">Frases</a>
-            <a href="descubre-tu-viaje.html">Quiz</a>
+            <a href="descubre-tu-viaje.html">Descubrir</a>
         </nav>
         <div class="header-right">
             <div class="auth-actions" id="guestAuthActions">
@@ -796,18 +796,18 @@
     <main class="shell">
         <h1>Tu diario de viajes 📸</h1>
         <p class="intro">
-            Guarda momentos, historias y recuerdos de cada lugar que visites
+            Guarda momentos, historias y recuerdos de cada lugar que visites.
         </p>
         <p class="note">
-            Las fotos que subas desde tu PC se guardan como datos en el navegador (localStorage), con un límite aproximado de ~5 MB en total.
-            Para archivos grandes, usa una URL de imagen (por ejemplo un enlace <code>https://</code>) o comprime la foto antes.
-            Subidas desde archivo: máximo <strong>1,5 MB</strong> por foto.
+            Las fotos que subas desde tu equipo se guardan en el navegador (localStorage), con un límite aproximado de ~5 MB en total.
+            Si el archivo es grande, usa una URL de imagen (por ejemplo un enlace <code>https://</code>) o comprime la foto antes.
+            Por archivo: máximo <strong>1,5 MB</strong> por imagen.
         </p>
 
         <div class="flash" id="flash" role="status"></div>
 
         <section class="posts-panel" style="margin-bottom: 1rem;">
-            <h2 class="gallery-title">Antes vs después del viaje</h2>
+            <h2 class="gallery-title">Antes y después del viaje</h2>
             <div class="field">
                 <label for="beforeTripText">Antes</label>
                 <textarea id="beforeTripText" maxlength="600" placeholder="¿Cómo te sentías antes de este viaje?"></textarea>
@@ -829,7 +829,7 @@
                     </div>
                     <div class="field">
                         <label for="postCaption">Descripción</label>
-                        <textarea id="postCaption" name="caption" maxlength="2000" placeholder="Qué hiciste, con quién, un dato del lugar…"></textarea>
+                        <textarea id="postCaption" name="caption" maxlength="2000" placeholder="¿Qué hiciste, con quién, qué te sorprendió del lugar?…"></textarea>
                     </div>
                     <div class="field">
                         <label for="postImageUrl">URL de la imagen (opcional si subes archivo)</label>
@@ -967,7 +967,7 @@
                 const empty = document.createElement("p");
                 empty.className = "empty-state";
                 empty.style.gridColumn = "1 / -1";
-                empty.textContent = "Aún no hay entradas. Publica tu primera foto arriba.";
+                empty.textContent = "Aún no hay historias. Crea tu primera entrada arriba.";
                 grid.append(empty);
                 return;
             }
@@ -1017,7 +1017,7 @@
                     const next = loadPosts().filter((p) => p.id !== post.id);
                     savePosts(next);
                     render();
-                    showFlash("Entrada eliminada.", "ok");
+                    showFlash("Historia eliminada.", "ok");
                 });
                 actions.append(del);
 
@@ -1045,7 +1045,7 @@
             const file = fileInput.files && fileInput.files[0];
 
             if (!title) {
-                showFlash("Escribe un título.", "error");
+                showFlash("Escribe un título para tu historia.", "error");
                 return;
             }
 
@@ -1102,7 +1102,7 @@
 
             form.reset();
             render();
-            showFlash("Entrada guardada.", "ok");
+            showFlash("Historia guardada.", "ok");
         });
 
         const existingReflection = loadReflection();

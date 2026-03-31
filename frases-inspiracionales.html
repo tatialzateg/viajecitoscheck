@@ -357,22 +357,22 @@
     <header class="site-header">
         <div class="site-header-inner">
         <div class="site-logo">ViajecitosCheck</div>
-        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menu">☰</button>
+        <button type="button" class="nav-toggle" id="navToggleBtn" aria-label="Abrir menú">☰</button>
         <button type="button" class="auth-btn" id="themeToggleBtn" aria-label="Cambiar tema" aria-pressed="false" title="Cambiar tema"><span class="theme-knob" aria-hidden="true">☀</span></button>
-        <nav class="site-nav" aria-label="Menu principal">
-            <a href="index.html">Inicio</a><a href="agenda-viaje.html">Agenda</a><a href="mapa-suenos.html">Mapa de sueños</a><a href="blog-viajes.html">Blog</a><a href="inspiracion-viajera.html">Inspiración</a><a class="active" href="frases-inspiracionales.html">Frases</a><a href="descubre-tu-viaje.html">Quiz</a>
+        <nav class="site-nav" aria-label="Menú principal">
+            <a href="index.html">Inicio</a><a href="agenda-viaje.html">Agenda</a><a href="mapa-suenos.html">Mapa de sueños</a><a href="blog-viajes.html">Blog</a><a href="inspiracion-viajera.html">Inspiración</a><a class="active" href="frases-inspiracionales.html">Frases</a><a href="descubre-tu-viaje.html">Descubrir</a>
         </nav>
         <div class="header-right"><div class="auth-actions" id="guestAuthActions"><a class="auth-btn" href="index.html">Crear perfil</a><a class="auth-btn primary" href="index.html">Iniciar sesión</a></div><div class="auth-actions is-hidden" id="userAuthActions"><a class="auth-btn" href="index.html">Editar perfil</a><a class="auth-btn" href="index.html">Salir</a></div></div>
         </div>
     </header>
     <main class="shell">
         <h1>Frases inspiracionales</h1>
-        <p class="intro">Una dosis de motivación para acercarte a tu próximo viaje.</p>
+        <p class="intro">Frases breves para inspirarte y acercarte al viaje que tienes en mente.</p>
         <section class="quote-card">
             <p class="quote-text" id="quoteText"></p>
             <div class="btn-row">
-                <button class="btn primary" id="newQuoteBtn" type="button">Nueva frase</button>
-                <button class="btn" id="saveQuoteBtn" type="button">Guardar favorita</button>
+                <button class="btn primary" id="newQuoteBtn" type="button">Nueva inspiración</button>
+                <button class="btn" id="saveQuoteBtn" type="button">Guardar en favoritas</button>
             </div>
         </section>
         <section class="favorites">
@@ -403,12 +403,12 @@
 
         const KEY = "devtata-quote-favorites";
         const QUOTES = [
-            "Viajar no es escapar de la vida, es evitar que la vida se te escape.",
-            "El mundo es un libro y quien no viaja solo lee una pagina.",
+            "Viajar no es escapar de la vida: es evitar que la vida se te escape.",
+            "El mundo es un libro y quien no viaja solo lee una página.",
             "Cada destino te cambia de una forma que no esperabas.",
-            "Primero sueñas el viaje, despues el viaje te transforma.",
-            "No necesitas todo resuelto para empezar a avanzar.",
-            "Tu proxima aventura empieza con una decision pequeña hoy."
+            "Primero sueñas el viaje; después, el viaje te transforma.",
+            "No necesitas tenerlo todo resuelto para empezar a avanzar.",
+            "Tu próxima aventura empieza con una decisión pequeña hoy."
         ];
         const quoteText = document.getElementById("quoteText");
         const favoritesList = document.getElementById("favoritesList");
